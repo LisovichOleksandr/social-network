@@ -1,0 +1,27 @@
+.container {
+	padding: 20px;
+	color: rgb(31, 41, 41);
+}
+
+.container p {
+	font-size: 40px;
+}
+
+.headApparatNav {
+	color: rgba(51, 100, 153, 0.424)
+}
+
+.container button {
+	color: aliceblue;
+	background: rgb(13, 7, 70);
+
+	height: 75px;
+	width: 122px;
+	font-size: 30px;
+	border-radius: 10%;
+}
+
+.container button:active {
+	background: rgb(85, 136, 123);
+	transition: background 0s;
+}

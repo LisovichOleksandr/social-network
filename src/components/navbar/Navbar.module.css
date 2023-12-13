@@ -1,0 +1,18 @@
+.nav {
+	grid-area: n;
+	background-color: rgb(57, 54, 54);
+	padding: 30px;
+}
+
+.item a {
+	color: white;
+	text-decoration: none;
+}
+
+.item a.active {
+	background-color: rgb(0, 223, 204);
+}
+
+.friends {
+	margin-top: 50px;
+}

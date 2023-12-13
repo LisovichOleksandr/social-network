@@ -1,0 +1,35 @@
+.container {
+	color: rgb(31, 41, 41);
+}
+
+.container p {
+	font-size: 40px;
+}
+
+.headApparatNav {
+	display: flex;
+	background-color: rgb(57, 54, 54);
+	padding: 2%;
+}
+
+
+.item {
+	margin: 0 20px;
+	font-size: 20px;
+}
+
+.item a {
+	color: white;
+	text-decoration: none;
+}
+
+.item a.active {
+	background-color: rgb(0, 223, 204);
+}
+
+button {
+	height: 75px;
+	width: 122px;
+	font-size: 30px;
+	border-radius: 10%;
+}

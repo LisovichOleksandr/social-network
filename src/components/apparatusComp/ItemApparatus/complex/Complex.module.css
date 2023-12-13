@@ -1,0 +1,20 @@
+.container {
+	padding: 20px;
+	color: rgb(31, 41, 41);
+}
+
+.container p {
+	font-size: 40px;
+}
+
+.headApparatNav {
+	color: rebeccapurple
+}
+
+button {
+
+	height: 75px;
+	width: 122px;
+	font-size: 30px;
+	border-radius: 10%;
+}

@@ -1,0 +1,17 @@
+.postsBlock {
+	border: 1px solid rgb(52, 43, 43);
+	padding: 10px;
+}
+
+.postsBlock textarea {
+	width: 800px;
+	height: 60px;
+	font-size: 20px;
+	padding: 5px;
+}
+
+
+
+.posts {
+	margin-top: 10px;
+}

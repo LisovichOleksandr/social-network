@@ -1,0 +1,27 @@
+.item {
+	display: flex;
+	color: rgb(158, 72, 35);
+}
+
+.item img {
+	width: 80px;
+	height: 80px;
+	border-radius: 50px;
+}
+
+.item p {
+	margin-left: 40px;
+	color: rgb(31, 23, 23);
+}
+
+.person {
+	width: 100px;
+	padding-right: 20px;
+}
+
+.mess {
+	height: 100px;
+	width: 70%;
+	border: 1px solid black;
+
+}
