@@ -4,12 +4,9 @@ import './App.css'
 import Apparatus from './components/apparatusComp/apparatus'
 import Navbar from './components/navbar/Navbar'
 import Settings from './components/settings/Settings'
-// import DialogsContainer from './components/dialogs/DialogsContainer';
 import ComplexContainer from './components/apparatusComp/ItemApparatus/complex/ComplexContainer'
 import SimplePresentContainer from './components/apparatusComp/ItemApparatus/simplePresent/SimplepresentContainer'
 import MusicContainer from './components/music/MusicContainer'
-import NewsContainer from './components/news/NewsContainer'
-// import UsersContainer from './components/users/UsersContainer';
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
@@ -28,6 +25,7 @@ import SoftSkills from './components/softSkills/softSkills'
 import { initializeApp } from './redux/appReducer'
 import EtymologyContainer from './components/apparatusComp/ItemApparatus/etymology/etymologyContainer'
 import DisplayEtymologyContainer from './components/apparatusComp/ItemApparatus/etymology/displayEtymology/displayEtymologyContainer'
+import News from './components/news/News'
 const DialogsContainer = React.lazy(() =>
 	import('./components/dialogs/DialogsContainer')
 )
@@ -67,7 +65,7 @@ function App(props) {
 							</Suspense>
 						}
 					/>
-					<Route path='/news' element={<NewsContainer />} />
+					<Route path='/news' element={<News />} />
 					<Route path='/music' element={<MusicContainer />} />
 					<Route path='/settings' element={<Settings />} />
 					<Route path='/apparatus' element={<Apparatus />} />

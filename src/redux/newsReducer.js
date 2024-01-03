@@ -4,8 +4,8 @@ const INPUT_TEXT = 'news/INPUT_TEXT'
 let initialState = {
 	text: 'I am a news',
 	newsData: [
-		{ id: 1, news: 'Let my piple go.' },
-		{ id: 2, news: 'Redux is undertating' },
+		{ id: 1, news: 'Let my people go.' },
+		{ id: 2, news: 'Redux is understating' },
 	],
 }
 
