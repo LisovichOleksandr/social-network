@@ -101,7 +101,7 @@ export const follow = userId => async dispatch => {
 	followUnfollowFlow(dispatch, userId, apiMethod, actionCreator)
 }
 
-export const unfollow = userId => async dispatch => {
+export const unFollow = userId => async dispatch => {
 	let apiMethod = usersAPI.unfollow.bind(usersAPI)
 	let actionCreator = unfollowSuccess
 	followUnfollowFlow(dispatch, userId, apiMethod, actionCreator)

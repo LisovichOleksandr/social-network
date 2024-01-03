@@ -1,33 +1,59 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import styles from './Users.module.css'
-import userPhoto from '../../assets/images/Untitled.png'
+import React, { useEffect } from 'react'
 import Paginator from '../common/paginator/paginator'
 import User from './User'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+	getCurrentPage,
+	getFollowingInProgress,
+	getIsFetching,
+	getPageSize,
+	getTotalUsersCount,
+	getUsersAll,
+} from '../../redux/usersSelectors'
+import {
+	follow,
+	getUsers,
+	setCurrentPage,
+	unFollow,
+} from '../../redux/usersReducer'
+import Preloader from '../common/preloader/preloader'
 
-let Users = props => {
+const Users = props => {
+	const followingInProgress = useSelector(state =>
+		getFollowingInProgress(state)
+	)
+	const users = useSelector(state => getUsersAll(state))
+	const totalUsersCount = useSelector(state => getTotalUsersCount(state))
+	const isFetching = useSelector(state => getIsFetching(state))
+	const currentPage = useSelector(state => getCurrentPage(state))
+	const pageSize = useSelector(state => getPageSize(state))
+	const dispatch = useDispatch()
+	useEffect(() => {
+		dispatch(getUsers(currentPage, pageSize))
+	}, [currentPage, pageSize])
+
+	const onPageChanged = pageNumber => {
+		dispatch(setCurrentPage(pageNumber))
+		dispatch(getUsers(pageNumber, pageSize))
+	}
 	return (
 		<div>
+			{isFetching ? <Preloader /> : null}
 			<Paginator
-				totalItems={props.totalUsersCount}
-				pageSize={props.pageSize}
-				onPageChanged={props.onPageChanged}
+				currentButton={currentPage}
+				totalItems={totalUsersCount}
+				pageSize={pageSize}
+				onPageChanged={onPageChanged}
 			/>
-			{props.users.map(u => (
+			{users.map(u => (
 				<User
 					key={u.id}
 					user={u}
-					follow={props.follow}
-					unFollow={props.unfollow}
-					followingInProgress={props.followingInProgress}
+					followingInProgress={followingInProgress}
+					follow={follow}
+					unFollow={unFollow}
 				/>
 			))}
-
-			<Paginator
-				totalItems={props.totalUsersCount}
-				pageSize={props.pageSize}
-				onPageChanged={props.onPageChanged}
-			/>
 		</div>
 	)
 }

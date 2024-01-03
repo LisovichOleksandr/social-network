@@ -2,8 +2,10 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import userPhoto from '../../assets/images/Untitled.png'
 import styles from './Users.module.css'
+import { useDispatch } from 'react-redux'
 
 const User = ({ user, follow, unFollow, followingInProgress }) => {
+	const dispatch = useDispatch()
 	return (
 		<div className={styles.userContainer}>
 			<div>
@@ -21,7 +23,7 @@ const User = ({ user, follow, unFollow, followingInProgress }) => {
 						<button
 							disabled={followingInProgress}
 							onClick={() => {
-								unFollow(user.id)
+								dispatch(unFollow(user.id))
 							}}
 						>
 							unFollow
@@ -30,7 +32,7 @@ const User = ({ user, follow, unFollow, followingInProgress }) => {
 						<button
 							disabled={followingInProgress}
 							onClick={() => {
-								follow(user.id)
+								dispatch(follow(user.id))
 							}}
 						>
 							Follow

@@ -1,10 +1,14 @@
 import styles from './paginator.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-const Paginator = ({ totalItems, pageSize, onPageChanged }) => {
+const Paginator = ({ currentButton, totalItems, pageSize, onPageChanged }) => {
 	const [currentPage, setCurrentPage] = useState(1)
 
-	let quantityPage = totalItems / pageSize
+	useEffect(() => {
+		setCurrentPage(currentButton)
+	}, [])
+
+	let quantityPage = Math.ceil(totalItems / pageSize)
 	const pages = []
 	const getArrayPages = () => {
 		if (currentPage <= 5) {
