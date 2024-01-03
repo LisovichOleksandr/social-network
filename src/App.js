@@ -26,9 +26,7 @@ import { initializeApp } from './redux/appReducer'
 import EtymologyContainer from './components/apparatusComp/ItemApparatus/etymology/etymologyContainer'
 import DisplayEtymologyContainer from './components/apparatusComp/ItemApparatus/etymology/displayEtymology/displayEtymologyContainer'
 import News from './components/news/News'
-const DialogsContainer = React.lazy(() =>
-	import('./components/dialogs/DialogsContainer')
-)
+const Dialogs = React.lazy(() => import('./components/dialogs/Dialogs'))
 const UsersContainer = React.lazy(() =>
 	import('./components/users/UsersContainer')
 )
@@ -51,7 +49,7 @@ function App(props) {
 						path='/dialogs'
 						element={
 							<Suspense fallback={<Preloader />}>
-								<DialogsContainer />
+								<Dialogs />
 							</Suspense>
 						}
 					/>
