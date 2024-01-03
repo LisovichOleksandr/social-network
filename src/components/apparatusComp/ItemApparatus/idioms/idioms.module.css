@@ -1,0 +1,13 @@
+.idioms li {
+  display: block;
+  text-decoration: none;
+  border: 2px rgb(152, 172, 186) solid;
+  background-color: rgb(167, 187, 200);
+  border-radius: 10px;
+  padding-left: 10px;
+  margin-top: 5px;
+  box-shadow: 1px 3px 5px rgb(182, 172, 186);
+}
+.idioms li:hover {
+  background-color: rgb(177, 187, 210);
+}

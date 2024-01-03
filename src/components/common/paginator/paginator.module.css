@@ -1,0 +1,25 @@
+.container {
+	/* display: flex;
+	justify-content: space-around; */
+}
+.paginator__item {
+	display: inline-block;
+}
+
+.paginator__item li {
+	display: contents;
+	text-decoration: none;
+}
+
+.paginator__item button {
+	background-color: rgb(21, 3, 3);
+	width: 82%;
+}
+
+.paginator__item button:hover {
+	background-color: rgb(79, 1, 1);
+}
+
+.active button {
+	background-color: rgb(118, 13, 13);
+}

@@ -1,10 +1,14 @@
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
-const SEND_MESSAGE = 'SEND-MESSAGE'
+const UPDATE_NEW_MESSAGE_BODY = 'dialogs/UPDATE-NEW-MESSAGE-BODY'
+const SEND_MESSAGE = 'dialogs/SEND-MESSAGE'
 
 let initialState = {
 	messegeNow: 'I am messages',
 	messagesData: [
-		{ id: 1, message: 'Розвивай мистецтво самоіронії, відкажись від власної важності!!!' },
+		{
+			id: 1,
+			message:
+				'Розвивай мистецтво самоіронії, відкажись від власної важності!!!',
+		},
 		{ id: 2, message: 'How are you?' },
 		{ id: 3, message: 'Whot is your name?' },
 		{ id: 4, message: 'Galya is helping gerl.' },
@@ -26,17 +30,17 @@ const dialogsReducer = (state = initialState, action) => {
 		case UPDATE_NEW_MESSAGE_BODY:
 			return {
 				...state,
-				messegeNow: action.newText
+				messegeNow: action.newText,
 			}
 
 		case SEND_MESSAGE:
 			let newMessage = {
 				id: 5,
-				message: action.messageText
+				message: action.messageText,
 			}
 			return {
 				...state,
-				messagesData: [...state.messagesData, newMessage]
+				messagesData: [...state.messagesData, newMessage],
 			}
 
 		default:
@@ -44,8 +48,10 @@ const dialogsReducer = (state = initialState, action) => {
 	}
 }
 
-export const sendMessage = (messageText) => ({ type: SEND_MESSAGE, messageText })
-export const updateNewMessageBody = (text) =>
-	({ type: UPDATE_NEW_MESSAGE_BODY, newText: text })
+export const sendMessage = messageText => ({ type: SEND_MESSAGE, messageText })
+export const updateNewMessageBody = text => ({
+	type: UPDATE_NEW_MESSAGE_BODY,
+	newText: text,
+})
 
 export default dialogsReducer

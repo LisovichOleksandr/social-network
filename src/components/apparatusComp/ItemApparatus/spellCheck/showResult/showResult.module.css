@@ -1,0 +1,11 @@
+.container {
+  width: 410px;
+}
+
+.error {
+  color: tomato;
+}
+
+.original {
+  float: right;
+}

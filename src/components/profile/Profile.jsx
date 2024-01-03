@@ -1,14 +1,17 @@
-import React from 'react';
-import classes from './Profile.module.css'
-import ProfileInfo from './profileInfo/ProfileInfo';
-import MyPostsContainer from './myPosts/MyPostsContainer';
-import { Navigate } from 'react-router-dom';
+import React from 'react'
+import MyPostsContainer from './myPosts/MyPostsContainer'
+import ProfileInfo from './profileInfo/ProfileInfo'
 
-const Profile = (props) => {
-	console.log('profileRENDER')
+const Profile = ({ savePhoto, isOwner, profile, status, updateStatus }) => {
 	return (
 		<div>
-			<ProfileInfo savePhoto={props.savePhoto} isOwner={props.isOwner} profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+			<ProfileInfo
+				savePhoto={savePhoto}
+				isOwner={isOwner}
+				profile={profile}
+				status={status}
+				updateStatus={updateStatus}
+			/>
 			<MyPostsContainer />
 		</div>
 	)

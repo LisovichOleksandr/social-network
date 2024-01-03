@@ -1,12 +1,12 @@
-const ADD_NEWS = 'ADD-NEWS'
-const INPUT_TEXT = 'INPUT_TEXT'
+const ADD_NEWS = 'news/ADD-NEWS'
+const INPUT_TEXT = 'news/INPUT_TEXT'
 
 let initialState = {
 	text: 'I am a news',
 	newsData: [
 		{ id: 1, news: 'Let my piple go.' },
 		{ id: 2, news: 'Redux is undertating' },
-	]
+	],
 }
 
 const newsReducer = (state = initialState, action) => {
@@ -14,14 +14,14 @@ const newsReducer = (state = initialState, action) => {
 		case INPUT_TEXT:
 			return {
 				...state,
-				text: action.text
+				text: action.text,
 			}
-			case ADD_NEWS:
-				let post = { id: 1, news: state.text }
+		case ADD_NEWS:
+			let post = { id: 1, news: state.text }
 			return {
 				...state,
-				text:'',
-				newsData:[...state.newsData, post]
+				text: '',
+				newsData: [...state.newsData, post],
 			}
 		default:
 			return state
@@ -29,6 +29,6 @@ const newsReducer = (state = initialState, action) => {
 }
 
 export const addNewsCreator = () => ({ type: ADD_NEWS })
-export const inputText = (text) => ({ type: INPUT_TEXT, text })
+export const inputText = text => ({ type: INPUT_TEXT, text })
 
 export default newsReducer

@@ -1,0 +1,24 @@
+.list li {
+  display: flex;
+  width: 200px;
+  margin: 2px;
+  padding: 5px 15px;
+  border-radius: 20px;
+  text-decoration: none;
+  text-transform: capitalize;
+  border: 1px solid black;
+  color: rgb(10, 10, 78);
+  background-color: rgb(234, 227, 237);
+}
+.list li:hover {
+  color: rgb(143, 182, 65);
+  background-color: rgb(194, 237, 237);
+}
+
+.favorites li {
+  background-color: rgb(134, 227, 237);
+}
+
+.no {
+  background-color: #fff;
+}

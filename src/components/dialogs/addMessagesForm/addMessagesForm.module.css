@@ -1,8 +1,8 @@
 .send {
-	display: flex;
+  display: flex;
 }
 
-.send button {
+/* .send button {
 	color: aliceblue;
 	background: rgb(13, 7, 70);
 	margin-left: 20px;
@@ -15,15 +15,14 @@
 .send button:active {
 	background: rgb(85, 136, 123);
 	transition: background 0s;
-}
+} */
 
 .send textarea {
-	color: rgb(30, 40, 49);
-	background: rgb(235, 229, 244);
-	margin-left: 20px;
-	padding: 10px;
-	height: 100px;
-	width: 352px;
-	font-size: 30px;
-
+  color: rgb(30, 40, 49);
+  background: rgb(235, 229, 244);
+  margin-left: 20px;
+  padding: 10px;
+  height: 100px;
+  width: 352px;
+  font-size: 30px;
 }

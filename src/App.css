@@ -1,22 +1,46 @@
 .app-wrapper {
-	margin: 0 auto;
-	display: grid;
-	width: 1200px;
-	font-size: 20px;
+  margin: 0 auto;
+  display: grid;
+  width: 1200px;
+  font-size: 20px;
 
-	grid-template-areas:
-		"h h"
-		"n c";
-	grid-template-rows: 60px 1fr;
-	grid-template-columns: 2fr 10fr;
-	grid-gap: 10px;
+  grid-template-areas:
+    "h h"
+    "n c";
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+  grid-gap: 10px;
 }
 
 .app-wrapper-content {
-	grid-area: c;
-	background-color: rgba(220, 244, 244, 0.071);
+  grid-area: c;
+  background-color: rgba(220, 244, 244, 0.071);
 }
 
 .active {
-	background-color: rgb(10, 123, 117);
+  background-color: rgb(10, 123, 117);
+}
+
+button {
+  /* background-color: rgb(27, 21, 77); */
+  background-color: rgb(132, 84, 0);
+
+  opacity: 90%;
+  border-radius: 6px;
+  margin: 4px 5px;
+  padding: 6px 20px;
+  border: none;
+  font-size: 16px;
+  color: antiquewhite;
+}
+
+button:hover {
+  /* background-color: rgb(74, 69, 116); */
+  background-color: rgb(27, 21, 77);
+}
+button:active {
+  background: rgb(119, 86, 9);
+  opacity: 50%;
+
+  transition: background 0s;
 }

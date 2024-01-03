@@ -1,32 +1,31 @@
 .dialogs {
-	display: grid;
+  display: grid;
 
-	grid-template-columns: 2fr 10fr;
+  grid-template-columns: 2fr 10fr;
 }
 
 .dialogs__items {
-	padding: 10px;
+  padding: 10px;
 }
 
 .dialogs__items .active {
-	color: rgb(17, 16, 14);
+  color: rgb(17, 16, 14);
 }
 
-
 .dialog a {
-	color: rgb(91, 9, 9);
-	text-decoration: none;
+  color: rgb(91, 9, 9);
+  text-decoration: none;
 }
 
 .messages {
-	padding: 10px;
+  padding: 10px;
 }
 
 .send {
-	display: flex;
+  display: flex;
 }
 
-.send button {
+/* .send button {
 	color: aliceblue;
 	background: rgb(13, 7, 70);
 	margin-left: 20px;
@@ -39,15 +38,14 @@
 .send button:active {
 	background: rgb(85, 136, 123);
 	transition: background 0s;
-}
+} */
 
 .send textarea {
-	color: rgb(30, 40, 49);
-	background: rgb(235, 229, 244);
-	margin-left: 20px;
-	padding: 10px;
-	height: 100px;
-	width: 352px;
-	font-size: 30px;
-
+  color: rgb(30, 40, 49);
+  background: rgb(235, 229, 244);
+  margin-left: 20px;
+  padding: 10px;
+  height: 100px;
+  width: 352px;
+  font-size: 30px;
 }

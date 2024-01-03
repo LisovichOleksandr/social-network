@@ -1,0 +1,25 @@
+.container {
+	padding: 20px;
+	color: rgb(31, 41, 41);
+}
+
+.world {
+	border: 2px solid rgb(39, 29, 29);
+	width: 400px;
+	box-shadow: inset;
+	height: 66px;
+	text-align: center;
+	margin: 10px;
+	padding: 20px 0;
+	text-transform: capitalize;
+	font-size: 29px;
+	background-color: #e7f6fb;
+}
+
+.on__off__block * {
+	margin: 15px;
+}
+
+.spead__block * {
+	margin: 15px;
+}
