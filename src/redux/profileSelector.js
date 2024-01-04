@@ -5,3 +5,7 @@ export const getProfile = state => {
 export const getStatusSelector = state => {
 	return state.profilePage.status
 }
+
+export const getPostData = state => {
+	return state.profilePage.postData
+}

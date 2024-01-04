@@ -1,6 +1,6 @@
 import React from 'react'
-import MyPostsContainer from './myPosts/MyPostsContainer'
 import ProfileInfo from './profileInfo/ProfileInfo'
+import MyPosts from './myPosts/MyPosts'
 
 const Profile = ({ savePhoto, isOwner, profile, status, updateStatus }) => {
 	return (
@@ -12,7 +12,7 @@ const Profile = ({ savePhoto, isOwner, profile, status, updateStatus }) => {
 				status={status}
 				updateStatus={updateStatus}
 			/>
-			<MyPostsContainer />
+			<MyPosts />
 		</div>
 	)
 }
