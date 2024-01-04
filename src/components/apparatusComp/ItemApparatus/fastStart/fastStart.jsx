@@ -3,7 +3,7 @@ import Navetr from '../../navApparatus/Navetr'
 import styles from './fastStart.module.css'
 import SimultaneousTranslation from './simultaneousTranslation/simultaneousTranslation'
 
-const FastStart = ({ wordRu }) => {
+const FastStart = () => {
 	const [editMode, setEditMode] = useState(false)
 
 	return (
@@ -19,7 +19,7 @@ const FastStart = ({ wordRu }) => {
 			</div>
 			<div>
 				{editMode ? (
-					<SimultaneousTranslation wordRu={wordRu} />
+					<SimultaneousTranslation />
 				) : (
 					'This`s training is name Fast Start. Forward to Success'
 				)}

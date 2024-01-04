@@ -3,8 +3,11 @@ import YouTube from 'react-youtube'
 import styles from './etymology.module.css'
 import ItemEtymology from './itemEtymology/itemEtymology'
 import Navetr from '../../navApparatus/Navetr'
+import { useSelector } from 'react-redux'
+import { getEtymologyData } from '../../../../redux/etymologySelector'
 
-const Etymology = ({ etymologyData }) => {
+const Etymology = () => {
+	const etymologyData = useSelector(state => getEtymologyData(state))
 	const [showVideo, setShowVideo] = useState(false)
 	const onPlayerReady = event => {
 		// access to player in all event handlers via event.target

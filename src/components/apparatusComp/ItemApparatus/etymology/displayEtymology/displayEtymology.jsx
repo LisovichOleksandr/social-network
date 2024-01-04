@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
+import { getEtymologyData } from '../../../../../redux/etymologySelector'
 
 const DisplayEtymology = () => {
 	const { id } = useParams()
 	const showItem = useSelector(state => {
-		let etymology = state.etymology.etymologyData
+		let etymology = getEtymologyData(state)
 		let d = etymology.filter(item => item.id == id)
 		return d
 	})

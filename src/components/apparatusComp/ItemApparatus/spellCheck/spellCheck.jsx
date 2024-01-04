@@ -4,25 +4,34 @@ import styles from './spellCheck.module.css'
 import Choosing from './choosing/choosing'
 import OptReduxForm from './formOpt/formOpt'
 import { reset } from 'redux-form'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import ShowResult from './showResult/showResult'
-const SpellCheck = ({
-	dataVerb,
-	spellCheckOpt,
-	addPackageWord,
-	itemOpt,
+import {
+	getDataVerb,
+	getExamenList,
+	getItemWithOpt,
+	getShowResult,
+	getSpellCheckOpt,
+} from '../../../../redux/wordsSelector'
+import {
 	addWordReview,
-	examen,
-	showResultData,
-	showResultAC,
 	setAllVerb,
-}) => {
+	showResultAC,
+} from '../../../../redux/wordsReducer'
+const SpellCheck = () => {
+	const showResultData = useSelector(state => getShowResult(state))
+	const examen = useSelector(state => getExamenList(state))
+	const itemOpt = useSelector(state => getItemWithOpt(state))
+	const spellCheckOpt = useSelector(state => getSpellCheckOpt(state))
+	const dataVerb = useSelector(state => getDataVerb(state))
+
 	const [editMode, setEditMode] = useState(false)
 	const [showResult, setShowResult] = useState(false)
 
 	const dispatch = useDispatch()
+
 	const onSubmit = formData => {
-		addWordReview(formData)
+		dispatch(addWordReview(formData))
 		dispatch(reset('opt'))
 	}
 	return (
@@ -34,14 +43,10 @@ const SpellCheck = ({
 					<button onClick={() => setEditMode(!editMode)}>
 						{editMode ? 'start' : 'Go For'}
 					</button>
-					<button onClick={setAllVerb}>Set All</button>
+					<button onClick={() => dispatch(setAllVerb())}>Set All</button>
 				</div>
 				{editMode ? (
-					<Choosing
-						dataVerb={dataVerb}
-						spellCheckOpt={spellCheckOpt}
-						addPackageWord={addPackageWord}
-					/>
+					<Choosing dataVerb={dataVerb} spellCheckOpt={spellCheckOpt} />
 				) : (
 					<div>
 						{Object.keys(itemOpt).length === 0 ? (
@@ -53,7 +58,7 @@ const SpellCheck = ({
 							<button
 								onClick={() => {
 									setShowResult(c => !c)
-									showResultAC()
+									dispatch(showResultAC())
 								}}
 							>
 								Show Result

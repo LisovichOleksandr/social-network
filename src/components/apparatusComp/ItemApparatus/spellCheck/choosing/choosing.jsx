@@ -1,6 +1,9 @@
+import { useDispatch } from 'react-redux'
 import styles from './choosing.module.css'
+import { addPackageWord } from '../../../../../redux/wordsReducer'
 
-const Choosing = ({ dataVerb, spellCheckOpt, addPackageWord }) => {
+const Choosing = ({ dataVerb, spellCheckOpt }) => {
+	const dispatch = useDispatch()
 	return (
 		<div>
 			<h2>Choose Select Pick Opt Elect Take</h2>
@@ -15,7 +18,7 @@ const Choosing = ({ dataVerb, spellCheckOpt, addPackageWord }) => {
 							>
 								<li
 									onClick={() => {
-										addPackageWord(verbPackage.id)
+										dispatch(addPackageWord(verbPackage.id))
 									}}
 								>
 									{verbPackage.baseForm}

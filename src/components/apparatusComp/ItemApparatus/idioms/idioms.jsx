@@ -4,11 +4,14 @@ import IdiomElement from './idiomElement/idiomElement'
 import styles from './idioms.module.css'
 import { NavLink } from 'react-router-dom'
 import YouTube from 'react-youtube'
+import { useSelector } from 'react-redux'
+import { getIdioms } from '../../../../redux/wordsSelector'
 
-const Idioms = ({ idioms, certainIdiom, setIdiom }) => {
+const Idioms = () => {
+	const idioms = useSelector(state => getIdioms(state))
 	const [showVideo, setShowVideo] = useState(false)
+
 	const onPlayerReady = event => {
-		// access to player in all event handlers via event.target
 		event.target.pauseVideo()
 	}
 
@@ -16,7 +19,6 @@ const Idioms = ({ idioms, certainIdiom, setIdiom }) => {
 		height: '390',
 		width: '640',
 		playerVars: {
-			// https://developers.google.com/youtube/player_parameters
 			autoplay: 1,
 		},
 	}
@@ -34,13 +36,8 @@ const Idioms = ({ idioms, certainIdiom, setIdiom }) => {
 					<button onClick={() => setShowVideo(false)}>Show On</button>
 				</>
 			)}
-			{/* <div>
-        <a href="https://www.youtube.com/watch?v=Hm-n-_uqCvQ" target="_blank">
-          Learn the 100 Most Common Idioms in 30 Minutes (with examples)
-        </a>
-      </div> */}
 			<div>
-				<IdiomElement idioms={idioms} setIdiom={setIdiom} />
+				<IdiomElement idioms={idioms} />
 			</div>
 		</div>
 	)

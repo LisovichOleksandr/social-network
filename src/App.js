@@ -3,17 +3,9 @@ import { connect } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
 import { compose } from 'redux'
 import './App.css'
-import ComplexContainer from './components/apparatusComp/ItemApparatus/complex/ComplexContainer'
-import DisplayEtymologyContainer from './components/apparatusComp/ItemApparatus/etymology/displayEtymology/displayEtymologyContainer'
-import EtymologyContainer from './components/apparatusComp/ItemApparatus/etymology/etymologyContainer'
-import FastStartContainer from './components/apparatusComp/ItemApparatus/fastStart/fastStartContainer'
-import IdiomPageContainer from './components/apparatusComp/ItemApparatus/idioms/idiomElement/idiomPage/idiomPageContainer'
-import IdiomsContainer from './components/apparatusComp/ItemApparatus/idioms/idiomsContainer'
-import SimplePresentContainer from './components/apparatusComp/ItemApparatus/simplePresent/SimplepresentContainer'
-import SpellCheckContainer from './components/apparatusComp/ItemApparatus/spellCheck/spellCheckContainer'
+import Idioms from './components/apparatusComp/ItemApparatus/idioms/idioms'
 import Apparatus from './components/apparatusComp/apparatus'
 import Preloader from './components/common/preloader/preloader'
-import HeaderContainer from './components/header/HeaderContainer'
 import LoginPage from './components/login/login'
 import Navbar from './components/navbar/Navbar'
 import News from './components/news/News'
@@ -25,6 +17,14 @@ import NavSoftSkills from './components/softSkills/navSoftSkills/navSoftSkills'
 import SoftSkills from './components/softSkills/softSkills'
 import { initializeApp } from './redux/appReducer'
 import Music from './components/music/Music'
+import IdiomPage from './components/apparatusComp/ItemApparatus/idioms/idiomElement/idiomPage/idiomPage'
+import Etymology from './components/apparatusComp/ItemApparatus/etymology/etymology'
+import DisplayEtymology from './components/apparatusComp/ItemApparatus/etymology/displayEtymology/displayEtymology'
+import SpellCheck from './components/apparatusComp/ItemApparatus/spellCheck/spellCheck'
+import FastStart from './components/apparatusComp/ItemApparatus/fastStart/fastStart'
+import Complex from './components/apparatusComp/ItemApparatus/complex/Complex'
+import SimplePresent from './components/apparatusComp/ItemApparatus/simplePresent/Simplepresent'
+import Header from './components/header/Header'
 const Dialogs = React.lazy(() => import('./components/dialogs/Dialogs'))
 const Users = React.lazy(() => import('./components/users/Users'))
 
@@ -36,10 +36,9 @@ function App(props) {
 	if (!props.initialized) {
 		return <Preloader />
 	}
-	//todo df eer e
 	return (
 		<div className='app-wrapper'>
-			<HeaderContainer />
+			<Header />
 			<Navbar />
 			<div className='app-wrapper-content'>
 				<Routes>
@@ -65,33 +64,21 @@ function App(props) {
 					<Route path='/music' element={<Music />} />
 					<Route path='/settings' element={<Settings />} />
 					<Route path='/apparatus' element={<Apparatus />} />
-					<Route
-						path='/apparatus/simple-present'
-						element={<SimplePresentContainer />}
-					/>
-					<Route path='/apparatus/complex' element={<ComplexContainer />} />
-					<Route
-						path='/apparatus/fast-start'
-						element={<FastStartContainer />}
-					/>
-					<Route
-						path='/apparatus/spellcheck'
-						element={<SpellCheckContainer />}
-					/>
-					<Route path='/apparatus/idioms' element={<IdiomsContainer />} />
-					<Route path='/apparatus/etymology' element={<EtymologyContainer />} />
+					<Route path='/apparatus/simple-present' element={<SimplePresent />} />
+					<Route path='/apparatus/complex' element={<Complex />} />
+					<Route path='/apparatus/fast-start' element={<FastStart />} />
+					<Route path='/apparatus/spellcheck' element={<SpellCheck />} />
+					<Route path='/apparatus/idioms' element={<Idioms />} />
+					<Route path='/apparatus/etymology' element={<Etymology />} />
 					<Route
 						path='/apparatus/etymology/:id?'
-						element={<DisplayEtymologyContainer />}
+						element={<DisplayEtymology />}
 					/>
 
 					<Route path='/soft-skills' element={<NavSoftSkills />} />
 					<Route path='/soft-skills/albert' element={<SoftSkills />} />
 
-					<Route
-						path='/apparatus/idioms/:id?'
-						element={<IdiomPageContainer />}
-					/>
+					<Route path='/apparatus/idioms/:id?' element={<IdiomPage />} />
 
 					<Route path='/login' element={<LoginPage />} />
 				</Routes>
