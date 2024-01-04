@@ -1,11 +1,11 @@
 .main {
-  padding: 10px;
+	padding: 10px;
 }
 
 .main textarea {
-  width: 68%;
-  height: 30px;
-  font-size: 20px;
+	width: 68%;
+	height: 30px;
+	font-size: 20px;
 }
 
 /* .main button {
@@ -16,3 +16,23 @@
 	height: 100%;
 	margin: 0 0 0 30px;
 } */
+
+.track__container {
+	/* height: 150px; */
+	border: 1px solid green;
+	margin: 2px;
+	background-color: #a4b5b5;
+}
+.track__container img {
+	position: relative;
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+}
+
+.imj__block {
+}
+
+.main__block {
+	margin-left: 140px;
+}

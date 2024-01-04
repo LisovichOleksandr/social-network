@@ -53,6 +53,16 @@ let initialState = {
 			],
 			description: 'Ассимилировался и уподобился',
 		},
+		{
+			id: 6,
+			baseForm: 'the same',
+			translate: 'тот же самый',
+			genesis: [
+				{ baseForm: '', translate: '' },
+				{ baseForm: '', translate: '' },
+			],
+			description: 'те саме',
+		},
 	],
 }
 

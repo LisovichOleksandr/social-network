@@ -15,7 +15,6 @@ import Apparatus from './components/apparatusComp/apparatus'
 import Preloader from './components/common/preloader/preloader'
 import HeaderContainer from './components/header/HeaderContainer'
 import LoginPage from './components/login/login'
-import MusicContainer from './components/music/MusicContainer'
 import Navbar from './components/navbar/Navbar'
 import News from './components/news/News'
 import ProfileContainer, {
@@ -25,6 +24,7 @@ import Settings from './components/settings/Settings'
 import NavSoftSkills from './components/softSkills/navSoftSkills/navSoftSkills'
 import SoftSkills from './components/softSkills/softSkills'
 import { initializeApp } from './redux/appReducer'
+import Music from './components/music/Music'
 const Dialogs = React.lazy(() => import('./components/dialogs/Dialogs'))
 const Users = React.lazy(() => import('./components/users/Users'))
 
@@ -62,7 +62,7 @@ function App(props) {
 						}
 					/>
 					<Route path='/news' element={<News />} />
-					<Route path='/music' element={<MusicContainer />} />
+					<Route path='/music' element={<Music />} />
 					<Route path='/settings' element={<Settings />} />
 					<Route path='/apparatus' element={<Apparatus />} />
 					<Route
