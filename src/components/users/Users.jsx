@@ -17,6 +17,7 @@ import {
 	unFollow,
 } from '../../redux/usersReducer'
 import Preloader from '../common/preloader/preloader'
+import withAuthRedirect from '../../hoc/redirect'
 
 const Users = props => {
 	const followingInProgress = useSelector(state =>
@@ -57,4 +58,4 @@ const Users = props => {
 		</div>
 	)
 }
-export default Users
+export default withAuthRedirect(Users)

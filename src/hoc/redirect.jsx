@@ -1,22 +1,17 @@
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-
-const authMapStateToProps = state => ({
-	isAuth: state.auth.isAuth,
-})
+import { getIsAuth } from '../redux/authSelector'
 
 const withAuthRedirect = Children => {
 	const AuthRedirectComponent = props => {
-		if (!props.isAuth) {
+		const isAuth = useSelector(state => getIsAuth(state))
+		if (!isAuth) {
 			return <Navigate replace to={'/login'} />
 		}
 		return <Children {...props} />
 	}
 
-	let ConnectedAuthRedirectComponent = connect(authMapStateToProps)(
-		AuthRedirectComponent
-	)
-	return ConnectedAuthRedirectComponent
+	return AuthRedirectComponent
 }
 
 export default withAuthRedirect

@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
 import { compose } from 'redux'
 import './App.css'
@@ -9,9 +9,6 @@ import Preloader from './components/common/preloader/preloader'
 import LoginPage from './components/login/login'
 import Navbar from './components/navbar/Navbar'
 import News from './components/news/News'
-import ProfileContainer, {
-	withRouter,
-} from './components/profile/ProfileContainer'
 import Settings from './components/settings/Settings'
 import NavSoftSkills from './components/softSkills/navSoftSkills/navSoftSkills'
 import SoftSkills from './components/softSkills/softSkills'
@@ -25,15 +22,22 @@ import FastStart from './components/apparatusComp/ItemApparatus/fastStart/fastSt
 import Complex from './components/apparatusComp/ItemApparatus/complex/Complex'
 import SimplePresent from './components/apparatusComp/ItemApparatus/simplePresent/Simplepresent'
 import Header from './components/header/Header'
+import Profile from './components/profile/Profile'
+import { getInitialized } from './redux/appSelector'
+import { withRouter } from './components/profile/ProfileContainer'
+import Friends from './components/friends/Friends'
 const Dialogs = React.lazy(() => import('./components/dialogs/Dialogs'))
 const Users = React.lazy(() => import('./components/users/Users'))
 
-function App(props) {
+function App() {
+	const initialized = useSelector(state => getInitialized(state))
+	const dispatch = useDispatch()
+
 	useEffect(() => {
-		props.initializeApp()
+		dispatch(initializeApp())
 	})
 
-	if (!props.initialized) {
+	if (!initialized) {
 		return <Preloader />
 	}
 	return (
@@ -50,8 +54,10 @@ function App(props) {
 							</Suspense>
 						}
 					/>
-					<Route path='/' element={<ProfileContainer />} />
-					<Route path='/profile/:id?' element={<ProfileContainer />} />
+					<Route path='/' element={<Profile />} />
+					<Route path='/profile/:id?' element={<Profile />} />
+
+					<Route path='/friends' element={<Friends />} />
 					<Route
 						path='/users'
 						element={
@@ -86,12 +92,4 @@ function App(props) {
 		</div>
 	)
 }
-
-const mapStateToProps = state => ({
-	initialized: state.app.initialized,
-})
-
-export default compose(
-	withRouter,
-	connect(mapStateToProps, { initializeApp })
-)(App)
+export default App

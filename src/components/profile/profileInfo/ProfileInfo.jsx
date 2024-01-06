@@ -4,16 +4,21 @@ import Preloader from '../../common/preloader/preloader'
 import ProfileStatus from './profileStatus/profileStatus'
 import ava from '../../../assets/images/Untitled.png'
 import ProfileDataForm from './ProfileDataForm'
+import { useDispatch, useSelector } from 'react-redux'
+import { getProfile, getStatusSelector } from '../../../redux/profileSelector'
+import { savePhoto } from '../../../redux/profileReducer'
 
 const ProfileInfo = props => {
 	const [editMode, setEditMode] = useState(false)
+	const profile = useSelector(state => getProfile(state))
+	const dispatch = useDispatch()
 
-	if (!props.profile) {
+	if (!profile) {
 		return <Preloader />
 	}
 
 	const onMainPhotoSelected = e => {
-		if (e.target.files.length) props.savePhoto(e.target.files[0])
+		if (e.target.files.length) dispatch(savePhoto(e.target.files[0]))
 	}
 
 	return (
@@ -29,24 +34,21 @@ const ProfileInfo = props => {
 			{/* STATUS */}
 			<div>
 				<b>Status:</b>
-				<ProfileStatus
-					status={props.status}
-					updateStatus={props.updateStatus}
-				/>
+				<ProfileStatus />
 			</div>
 			<div className={classes.ava}>
 				<div>
-					<img src={props.profile.photos.large || ava} alt='' />
+					<img src={profile.photos.large || ava} alt='' />
 					<br />
 					{props.isOwner && (
 						<input type={'file'} onChange={onMainPhotoSelected} />
 					)}
 				</div>
 				{editMode ? (
-					<ProfileDataForm profile={props.profile} />
+					<ProfileDataForm profile={profile} />
 				) : (
 					<ProfileData
-						profile={props.profile}
+						profile={profile}
 						isOwner={props.isOwner}
 						goToEditMode={() => {
 							setEditMode(true)

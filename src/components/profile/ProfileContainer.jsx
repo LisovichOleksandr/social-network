@@ -1,26 +1,19 @@
 import React from 'react'
-import Profile from './Profile'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+
+import Profile from './Profile'
 import {
 	savePhoto,
 	setUserProfile,
 	updateStatus,
 } from '../../redux/profileReducer'
 import { setCurrentPage } from '../../redux/usersReducer'
-import { useParams } from 'react-router-dom'
 import { getUserCurrent } from '../../redux/profileReducer'
 import { getStatus } from '../../redux/profileReducer'
 import withAuthRedirect from '../../hoc/redirect'
-import { compose } from 'redux'
 import { getProfile, getStatusSelector } from '../../redux/profileSelector'
 import { getAuthorizedUserId, getIsAuth } from '../../redux/authSelector'
-
-export const withRouter = Children => {
-	return props => {
-		const match = { params: useParams() }
-		return <Children {...props} match={match} />
-	}
-}
 
 class ProfileContainer extends React.Component {
 	refreshProfile() {
@@ -48,12 +41,12 @@ class ProfileContainer extends React.Component {
 	render() {
 		return (
 			<Profile
-				{...this.props}
-				savePhoto={this.props.savePhoto}
-				isOwner={!this.props.match.params.id}
-				profile={this.props.profile}
-				status={this.props.status}
-				updateStatus={this.props.updateStatus}
+			// {...this.props}
+			// isOwner={!this.props.match.params.id}
+			// profile={this.props.profile}
+			// status={this.props.status}
+			// savePhoto={this.props.savePhoto}
+			// updateStatus={this.props.updateStatus}
 			/>
 		)
 	}
@@ -77,6 +70,5 @@ export default compose(
 		updateStatus,
 		savePhoto,
 	}),
-	withRouter,
 	withAuthRedirect
 )(ProfileContainer)

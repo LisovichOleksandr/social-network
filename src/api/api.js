@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from 'axios'
 
 const instance = axios.create({
 	withCredentials: true,
 	baseURL: `https://social-network.samuraijs.com/api/1.0/`,
 	headers: {
-		'API-KEY': 'e12e5859-22cb-4b69-82b1-878c38421670'
+		'API-KEY': 'e12e5859-22cb-4b69-82b1-878c38421670',
 	},
 })
 
@@ -21,8 +21,14 @@ export const authAPI = {
 }
 
 const usersAPI = {
+	getFriends(friend = true) {
+		return instance
+			.get(`users?friend=${friend}`)
+			.then(response => response.data)
+	},
 	getUsers(currentPage = 1, pageSize = 20) {
-		return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+		return instance
+			.get(`users?page=${currentPage}&count=${pageSize}`)
 			.then(response => response.data)
 	},
 	getAuthMe() {
@@ -55,17 +61,14 @@ export const profileAPI = {
 		return instance.put(`profile/status`, { status: status })
 	},
 	savePhoto(photoFile) {
-		let data = new FormData();
-		data.append('image', photoFile);
+		let data = new FormData()
+		data.append('image', photoFile)
 		return instance.put(`profile/photo`, data, {
 			headers: {
-				'Content-Type': `multipart/form-data`
-			}
+				'Content-Type': `multipart/form-data`,
+			},
 		})
-	}
+	},
 }
-
-
-
 
 export default usersAPI

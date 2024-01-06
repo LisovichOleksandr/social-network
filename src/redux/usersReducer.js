@@ -8,6 +8,7 @@ const SET_CURRENT_PAGE = 'users/SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'users/SET_TOTAL_USERS_COUNT'
 const TOGGLE_PRELOADER = 'users/TOGGLE_PRELOADER'
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'users/TOGGLE_IS_FOLLOWING_PROGRESS'
+const SET_FRIENDS = 'users/SET_FRIENDS'
 
 let initialState = {
 	users: [],
@@ -16,6 +17,7 @@ let initialState = {
 	currentPage: 1,
 	isFetching: false,
 	followingInProgress: false,
+	friends: [],
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -49,6 +51,9 @@ const usersReducer = (state = initialState, action) => {
 		case TOGGLE_PRELOADER:
 			return { ...state, isFetching: action.isFetching }
 
+		case SET_FRIENDS:
+			return { ...state, friends: action.friends }
+
 		default:
 			return state
 	}
@@ -73,12 +78,26 @@ export const toggleFollowingProgress = isFetching => ({
 	type: TOGGLE_IS_FOLLOWING_PROGRESS,
 	isFetching,
 })
+const setFriends = friends => ({
+	type: SET_FRIENDS,
+	friends,
+})
 
 export const getUsers = (currentPage, pageSize) => async dispatch => {
 	dispatch(togglePreloader(true))
 	let data = await usersAPI.getUsers(currentPage, pageSize)
 	dispatch(setUsers(data.items))
 	dispatch(setTotalUsersCount(data.totalCount))
+	dispatch(togglePreloader(false))
+}
+
+export const getFriendsThunk = friends => async dispatch => {
+	dispatch(togglePreloader(true))
+	let { items } = await usersAPI.getFriends(friends)
+	dispatch(setFriends(items))
+	debugger
+	// dispatch(setUsers(data.items))
+	// dispatch(setTotalUsersCount(data.totalCount))
 	dispatch(togglePreloader(false))
 }
 
