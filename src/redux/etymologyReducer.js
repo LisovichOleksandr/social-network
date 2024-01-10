@@ -63,6 +63,16 @@ let initialState = {
 			],
 			description: 'те саме',
 		},
+		{
+			id: 7,
+			baseForm: 'fight',
+			translate: 'драться',
+			genesis: [
+				{ baseForm: '', translate: '' },
+				{ baseForm: '', translate: '' },
+			],
+			description: 'Древние рыцари фихтовали, от слова Фихтовать',
+		},
 	],
 }
 

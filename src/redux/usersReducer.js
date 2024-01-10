@@ -1,3 +1,4 @@
+import { useId } from 'react'
 import usersAPI from '../api/api'
 import { updateObjectInArray } from '../utils/object-helpers'
 
@@ -16,7 +17,7 @@ let initialState = {
 	totalUsersCount: 0,
 	currentPage: 1,
 	isFetching: false,
-	followingInProgress: false,
+	followingInProgress: [],
 	friends: [],
 }
 
@@ -46,7 +47,12 @@ const usersReducer = (state = initialState, action) => {
 			return { ...state, totalUsersCount: action.count }
 
 		case TOGGLE_IS_FOLLOWING_PROGRESS:
-			return { ...state, followingInProgress: action.isFetching }
+			return {
+				...state,
+				followingInProgress: action.isFetching
+					? [...state.followingInProgress, action.userId]
+					: [state.followingInProgress.filter(id => id != action.isFetching)],
+			}
 
 		case TOGGLE_PRELOADER:
 			return { ...state, isFetching: action.isFetching }
@@ -74,9 +80,10 @@ export const togglePreloader = isFetching => ({
 	type: TOGGLE_PRELOADER,
 	isFetching,
 })
-export const toggleFollowingProgress = isFetching => ({
+export const toggleFollowingProgress = (isFetching, userId) => ({
 	type: TOGGLE_IS_FOLLOWING_PROGRESS,
 	isFetching,
+	userId,
 })
 const setFriends = friends => ({
 	type: SET_FRIENDS,
@@ -107,12 +114,12 @@ const followUnfollowFlow = async (
 	apiMethod,
 	actionCreator
 ) => {
-	dispatch(toggleFollowingProgress(true))
+	dispatch(toggleFollowingProgress(true, userId))
 	let response = await apiMethod(userId)
 	if (response.data.resultCode == 0) {
 		dispatch(actionCreator(userId))
 	}
-	dispatch(toggleFollowingProgress(false))
+	dispatch(toggleFollowingProgress(false, userId))
 }
 export const follow = userId => async dispatch => {
 	let apiMethod = usersAPI.follow.bind(usersAPI)

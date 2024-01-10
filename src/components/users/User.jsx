@@ -21,7 +21,7 @@ const User = ({ user, follow, unFollow, followingInProgress }) => {
 				<div className={styles.button}>
 					{user.followed ? (
 						<button
-							disabled={followingInProgress}
+							disabled={followingInProgress.some(id => id === user.id)}
 							onClick={() => {
 								dispatch(unFollow(user.id))
 							}}
@@ -30,7 +30,7 @@ const User = ({ user, follow, unFollow, followingInProgress }) => {
 						</button>
 					) : (
 						<button
-							disabled={followingInProgress}
+							disabled={followingInProgress.some(id => id === user.id)}
 							onClick={() => {
 								dispatch(follow(user.id))
 							}}
