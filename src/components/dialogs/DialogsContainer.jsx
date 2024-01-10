@@ -1,20 +1,21 @@
-import { compose } from "redux"
-import { connect } from "react-redux"
-import { sendMessage, updateNewMessageBody } from "../../redux/dialogsReducer"
-import Dialogs from "./Dialogs"
-import withAuthRedirect from "../../hoc/redirect"
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import {
+	sendMessage,
+	updateNewMessageBody,
+} from '../../redux/dialogsReducer.ts'
+import Dialogs from './Dialogs'
+import withAuthRedirect from '../../hoc/redirect'
 
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
 	return {
 		messagesPage: state.messagesPage,
 	}
 }
 
-
 const mapDispatchToProps = {
 	updateNewMessageBody,
-	sendMessage
+	sendMessage,
 }
 
 export default compose(

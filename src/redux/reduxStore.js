@@ -4,19 +4,19 @@ import {
 	compose,
 	legacy_createStore as createStore,
 } from 'redux'
-import profileReducer from './profileReducer'
-import dialogsReducer from './dialogsReducer'
-import musicReducer from './musicReducer'
-import wordsReducer from './wordsReducer'
-import newsReducer from './newsReducer'
-import usersReducer from './usersReducer'
-import authReducer from './authReducer'
-import thunkMiddleware from 'redux-thunk'
 import { reducer as formReducer } from 'redux-form'
-import appReducer from './appReducer'
+import thunkMiddleware from 'redux-thunk'
+import appReducer from './appReducer.ts'
+import authReducer from './authReducer.ts'
+import dialogsReducer from './dialogsReducer.ts'
 import etymologyReducer from './etymologyReducer'
+import musicReducer from './musicReducer'
+import newsReducer from './newsReducer'
+import profileReducer from './profileReducer.ts'
+import usersReducer from './usersReducer'
+import wordsReducer from './wordsReducer'
 
-let redusers = combineReducers({
+let reducers = combineReducers({
 	profilePage: profileReducer,
 	messagesPage: dialogsReducer,
 	musicPage: musicReducer,
@@ -31,11 +31,11 @@ let redusers = combineReducers({
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
-	redusers,
+	reducers,
 	composeEnhancers(applyMiddleware(thunkMiddleware))
 )
 
-// let store = createStore(redusers, applyMiddleware(thunkMiddleware))
+// let store = createStore(reducers, applyMiddleware(thunkMiddleware))
 window.store = store
 
 export default store

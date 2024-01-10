@@ -5,11 +5,13 @@ import {
 	savePhoto,
 	setUserProfile,
 	updateStatus,
-} from '../../redux/profileReducer'
+	getUserCurrent,
+	getStatus,
+} from '../../redux/profileReducer.ts'
 import { setCurrentPage } from '../../redux/usersReducer'
 import { useParams } from 'react-router-dom'
-import { getUserCurrent } from '../../redux/profileReducer'
-import { getStatus } from '../../redux/profileReducer'
+// import { getUserCurrent } from '../../redux/profileReducer'
+// import { getStatus } from '../../redux/profileReducer'
 import withAuthRedirect from '../../hoc/redirect'
 import { compose } from 'redux'
 import { getProfile, getStatusSelector } from '../../redux/profileSelector'

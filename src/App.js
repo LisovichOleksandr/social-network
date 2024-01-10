@@ -25,7 +25,7 @@ import ProfileContainer, {
 } from './components/profile/ProfileContainer'
 import NavSoftSkills from './components/softSkills/navSoftSkills/navSoftSkills'
 import SoftSkills from './components/softSkills/softSkills'
-import { initializeApp } from './redux/appReducer'
+import { initializeApp } from './redux/appReducer.ts'
 import EtymologyContainer from './components/apparatusComp/ItemApparatus/etymology/etymologyContainer'
 import DisplayEtymologyContainer from './components/apparatusComp/ItemApparatus/etymology/displayEtymology/displayEtymologyContainer'
 const DialogsContainer = React.lazy(() =>

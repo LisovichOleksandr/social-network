@@ -43,7 +43,7 @@
 	// "workbench.productIconTheme": "fluent-icons",
 	"window.density.editorTabHeight": "compact",
 	"workbench.activityBar.location": "top",
-	"workbench.colorTheme": "Cobalt2",
+	"workbench.colorTheme": "Solarized Dark",
 	"editor.accessibilitySupport": "off",
 	"window.commandCenter": false,
 	"workbench.layoutControl.enabled": false,
@@ -57,6 +57,7 @@
 
 	// Font
 	"editor.fontSize": 15,
+	"editor.fontWeight": 900,
 	"editor.lineHeight": 20,
 	"editor.fontLigatures": true,
 	"editor.fontFamily": "Monaspace Neon, MonoLisa, Operator mono lig, Iosevka NFM, JetBrains Mono,  Maple Mono, Ubuntu Mono, DejaVu Sans Mono, Fira Code, monoki, Hasklig, PragmataPro, IBM Plex Mono, Victor Mono, Roboto Mono, monospace",
