@@ -8,7 +8,7 @@ import {
 	getUserCurrent,
 	getStatus,
 } from '../../redux/profileReducer.ts'
-import { setCurrentPage } from '../../redux/usersReducer'
+import { setCurrentPage } from '../../redux/usersReducer.ts'
 import { useParams } from 'react-router-dom'
 // import { getUserCurrent } from '../../redux/profileReducer'
 // import { getStatus } from '../../redux/profileReducer'

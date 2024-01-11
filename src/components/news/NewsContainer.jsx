@@ -1,16 +1,20 @@
-import { connect } from "react-redux"
-import { addNewsCreator, inputText,} from "../../redux/newsReducer"
-import News from "./News"
+import { connect } from 'react-redux'
+import { addNewsCreator, inputText } from '../../redux/newsReducer.ts'
+import News from './News'
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
 	return {
-		newsPage: state.newsPage
+		newsPage: state.newsPage,
 	}
 }
-const mapDispatchToProps = (dispatsh) => {
+const mapDispatchToProps = dispatsh => {
 	return {
-		inputText: (text) => {dispatsh(inputText(text))},
-		onSendNewsClick: () => {dispatsh(addNewsCreator())}
+		inputText: text => {
+			dispatsh(inputText(text))
+		},
+		onSendNewsClick: () => {
+			dispatsh(addNewsCreator())
+		},
 	}
 }
 

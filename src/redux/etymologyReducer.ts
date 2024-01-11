@@ -1,5 +1,18 @@
 const S = 'S'
 
+type GenesisType = {
+	baseForm: string
+	translate: string
+}
+
+type EtymologyDataType = {
+	id: number
+	baseForm: string
+	translate: string
+	genesis: Array<GenesisType>
+	description: string
+}
+
 let initialState = {
 	etymologyData: [
 		{
@@ -53,10 +66,15 @@ let initialState = {
 			],
 			description: 'Ассимилировался и уподобился',
 		},
-	],
+	] as Array<EtymologyDataType>,
 }
 
-const etymologyReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState
+
+const etymologyReducer = (
+	state = initialState,
+	action: any
+): InitialStateType => {
 	switch (action.type) {
 		case 's':
 			return { ...state }
@@ -65,6 +83,6 @@ const etymologyReducer = (state = initialState, action) => {
 	return state
 }
 
-export const executeSimplePresent = () => ({ type: 'a' })
+// export const executeSimplePresent = () => ({ type: 'a' })
 
 export default etymologyReducer

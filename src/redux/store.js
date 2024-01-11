@@ -1,13 +1,12 @@
-import dialogsReducer from "./dialogsReducer"
-import musicReducer from "./musicReducer"
-import profileReducer from "./profileReducer"
-import wordsReducer from "./wordsReducer"
-
+import dialogsReducer from './dialogsReducer'
+import musicReducer from './musicReducer'
+import profileReducer from './profileReducer'
+// import wordsReducer from "./wordsReducer"
 
 let store = {
 	_state: {
 		musicPage: {
-			searchText: 'I am Searching text'
+			searchText: 'I am Searching text',
 		},
 		profilePage: {
 			postData: [
@@ -16,7 +15,7 @@ let store = {
 				{ id: 3, post: 'Ind I am developer app apparatus', likesCount: 122 },
 				{ id: 4, post: 'Ind Movement is life.', likesCount: 32 },
 			],
-			newPostText: 'Romanets arque'
+			newPostText: 'Romanets arque',
 		},
 		messagesPage: {
 			messegeNow: 'I am messages',
@@ -39,19 +38,43 @@ let store = {
 		},
 		words: {
 			temporaryVerb: [],
-			arrTemporary: ['Start Off',],
+			arrTemporary: ['Start Off'],
 			adjectives: ['sly', 'original', 'substantial', 'nice'],
-			iYouHeShe: ['i', 'it', 'he', 'she', 'you', 'we', 'they',],
+			iYouHeShe: ['i', 'it', 'he', 'she', 'you', 'we', 'they'],
 			modalVerb: ['can', 'may', 'must', 'will', 'should', 'would', 'have'],
-			nouns: ['apple', 'cup', 'banana', 'director', 'table', 'manager', 'man', 'observer',],
-			nounsName: ['portnikov', 'ivan vasileevich', 'Mikhail Volodimirovich', 'nadiya pavlivna', 'mikola evstachiovich', 'aleksander nevzorov', 'sergey shnyrov', 'vladimir zelenskiy', 'joseph baiden', 'vladimir putin', 'aleksey arestovich', 'viktor yanukovich', 'viktor ushchenko', 'leonid kychma',],
+			nouns: [
+				'apple',
+				'cup',
+				'banana',
+				'director',
+				'table',
+				'manager',
+				'man',
+				'observer',
+			],
+			nounsName: [
+				'portnikov',
+				'ivan vasileevich',
+				'Mikhail Volodimirovich',
+				'nadiya pavlivna',
+				'mikola evstachiovich',
+				'aleksander nevzorov',
+				'sergey shnyrov',
+				'vladimir zelenskiy',
+				'joseph baiden',
+				'vladimir putin',
+				'aleksey arestovich',
+				'viktor yanukovich',
+				'viktor ushchenko',
+				'leonid kychma',
+			],
 			verbFirstPosition: [
 				['go', 'went', 'gone', 'going'],
 				['drive', 'drove', 'driven', 'driving'],
-				['forget', 'forgot', 'forhotten', 'forgeting',],
-				['like', 'liked', 'liked', 'liking',],
+				['forget', 'forgot', 'forhotten', 'forgeting'],
+				['like', 'liked', 'liked', 'liking'],
 				['want', 'wanted', 'wanted', 'wanting'],
-				['need', 'needed', 'needed', 'needing',],
+				['need', 'needed', 'needed', 'needing'],
 				['advise'],
 				['accomplish'],
 			],
@@ -61,9 +84,9 @@ let store = {
 				['drive', 'drove', 'driven', 'driving'],
 				['show', 'showed', 'shown', 'shoving'],
 				['forget', 'forgot', 'forhotten', 'forgeting'],
-				['like', 'liked', 'liked', 'liking',],
+				['like', 'liked', 'liked', 'liking'],
 				['want', 'wanted', 'wanted', 'wanting'],
-				['need', 'needed', 'needed', 'needing',],
+				['need', 'needed', 'needed', 'needing'],
 				['ask', 'asked', 'asked', 'asking'],
 				['listen', 'listened', 'listened', 'listening'],
 				['define', 'defined', 'defined', 'defining'],
@@ -141,10 +164,10 @@ let store = {
 				// ['awake'],
 				// ['award'],
 			],
-		}
+		},
 	},
 
-	_callSubscriber() { },
+	_callSubscriber() {},
 	getState() {
 		return this._state
 	},
@@ -156,12 +179,11 @@ let store = {
 		this._state.profilePage = profileReducer(this._state.profilePage, action)
 		this._state.messagesPage = dialogsReducer(this._state.messagesPage, action)
 		this._state.musicPage = musicReducer(this._state.musicPage, action)
-		this._state.words = wordsReducer(this._state.words, action)
+		// this._state.words = wordsReducer(this._state.words, action)
 		this._callSubscriber(this._state)
 	},
 }
 
 // window.store = store
-
 
 // export default store

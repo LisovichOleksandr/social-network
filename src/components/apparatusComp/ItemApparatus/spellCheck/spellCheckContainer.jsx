@@ -12,7 +12,7 @@ import {
 	addWordReview,
 	setAllVerb,
 	showResultAC,
-} from '../../../../redux/wordsReducer'
+} from '../../../../redux/wordsReducer.ts'
 
 const mapStateToProps = state => {
 	return {

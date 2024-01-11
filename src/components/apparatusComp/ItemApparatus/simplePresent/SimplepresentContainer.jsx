@@ -2,7 +2,7 @@ import React from 'react'
 import {
 	addFormData,
 	executeSimplePresent,
-} from '../../../../redux/wordsReducer'
+} from '../../../../redux/wordsReducer.ts'
 import SimplePresent from './Simplepresent'
 import { connect } from 'react-redux'
 import { getName, getVerb, getVerbTwo } from '../../../../redux/wordsSelector'

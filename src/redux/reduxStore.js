@@ -9,12 +9,12 @@ import thunkMiddleware from 'redux-thunk'
 import appReducer from './appReducer.ts'
 import authReducer from './authReducer.ts'
 import dialogsReducer from './dialogsReducer.ts'
-import etymologyReducer from './etymologyReducer'
-import musicReducer from './musicReducer'
-import newsReducer from './newsReducer'
+import etymologyReducer from './etymologyReducer.ts'
+import musicReducer from './musicReducer.ts'
+import newsReducer from './newsReducer.ts'
 import profileReducer from './profileReducer.ts'
-import usersReducer from './usersReducer'
-import wordsReducer from './wordsReducer'
+import usersReducer from './usersReducer.ts'
+import wordsReducer from './wordsReducer.ts'
 
 let reducers = combineReducers({
 	profilePage: profileReducer,

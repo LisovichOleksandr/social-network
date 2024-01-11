@@ -4,7 +4,9 @@ let initialState = {
 	searchText: 'I am Searching text',
 }
 
-const musicReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState
+
+const musicReducer = (state = initialState, action: any): InitialStateType => {
 	switch (action.type) {
 		case UPDATE_MUSIC_SEARCH_TEXT:
 			return {
@@ -16,9 +18,9 @@ const musicReducer = (state = initialState, action) => {
 			return state
 	}
 }
-export const updateMusicSearchCreator = text => ({
-	type: UPDATE_MUSIC_SEARCH_TEXT,
-	newText: text,
-})
+// export const updateMusicSearchCreator = text => ({
+// 	type: UPDATE_MUSIC_SEARCH_TEXT,
+// 	newText: text,
+// })
 
 export default musicReducer

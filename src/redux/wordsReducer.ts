@@ -2,11 +2,35 @@ import { capitalize, random } from '../utils/englishTreningApparatus/randomWord'
 
 const SIMPLE_PRESENT_SIMPLEST = 'words/SIMPLE_PRESENT_SIMPLEST'
 const ADD_FORM_DATA = 'words/ADD_FORM_DATA'
-const ADD_PACKGE_WORD = 'words/ADD_PACKGE_WORD'
+const ADD_PACKAGE_WORD = 'words/ADD_PACKGE_WORD'
 const SET_IDIOM = 'words/SET_IDIOM'
-const ADD_FOR_REIVIEW = 'words/ADD_FOR_REIVIEW'
+const ADD_FOR_REVIEW = 'words/ADD_FOR_REIVIEW'
 const SHOW_RESULT = 'words/SHOW_RESULT'
 const SET_ALL_VERB = 'words/SET_ALL_VERB'
+
+type DataVerbType = {
+	id: number
+	baseForm: string
+	translate: string
+	pastSimple: string
+	pastParticiple: string
+	gerund: string
+}
+
+type IdiomType = {
+	id: number
+	idiom: string
+	description: string
+	example: string
+}
+
+type ShowResultType = {
+	id: number
+	time: string
+	myVersion: string
+	original: string
+	translate: string
+}
 
 let initialState = {
 	name: '',
@@ -14,8 +38,8 @@ let initialState = {
 	verbTwo: '',
 	isChange: true,
 	nameFromForm: ['i', 'it', 'he', 'she', 'you', 'we', 'they'],
-	verbFromForm: [],
-	spellCheckOpt: [],
+	verbFromForm: [] as Array<string>,
+	spellCheckOpt: [] as Array<DataVerbType>,
 	dataVerb: [
 		{
 			id: 1,
@@ -185,7 +209,7 @@ let initialState = {
 			pastParticiple: 'learnt',
 			gerund: 'learned',
 		},
-	],
+	] as Array<DataVerbType>,
 	idioms: [
 		{
 			id: 1,
@@ -199,11 +223,153 @@ let initialState = {
 			description: 'place for description two Idiom',
 			example: 'place for example two Idiom',
 		},
-	],
-	certainIdiom: {},
-	examen: [],
-	showResult: {},
+	] as Array<IdiomType>,
+	certainIdiom: {} as null | IdiomType,
+	examen: [] as any,
+	showResult: [] as any,
 }
+
+type InitialStateType = typeof initialState
+
+const wordsReducer = (state = initialState, action: any): InitialStateType => {
+	switch (action.type) {
+		case SIMPLE_PRESENT_SIMPLEST:
+			let randomName = capitalize(random(state.nameFromForm))
+			let randomVerb = random(state.verbFromForm)
+			return {
+				...state,
+				name: randomName,
+				verb: randomVerb,
+			}
+
+		case ADD_FORM_DATA:
+			return {
+				...state,
+				nameFromForm: [...state.nameFromForm, ...action.name.split(', ')],
+				verbFromForm: action.verb.split(', '),
+			}
+		case ADD_PACKAGE_WORD:
+			let soughtAfterPackage = state.dataVerb.filter(
+				verbPackage => action.id === verbPackage.id
+			)
+			if (state.spellCheckOpt.some(el => el.id === action.id)) {
+				let newArray = state.spellCheckOpt.filter(el => el.id !== action.id)
+				return {
+					...state,
+					spellCheckOpt: [...newArray],
+				}
+			} else {
+				return {
+					...state,
+					spellCheckOpt: [...state.spellCheckOpt, ...soughtAfterPackage],
+				}
+			}
+		case SET_IDIOM:
+			let ac = action.id
+			let findForId = state.idioms.filter(idiom => idiom.id == ac)
+			return {
+				...state,
+				certainIdiom: findForId[0],
+			}
+
+		case ADD_FOR_REVIEW:
+			return {
+				...state,
+				examen: [...state.examen, action.word],
+			}
+
+		case SHOW_RESULT:
+			let examen = state.examen.map(knowledge => {
+				let value = Object.values(knowledge)[0]
+				let key = Object.keys(knowledge)[0]
+				let id: any = key.match(/\d+/)
+				let timeId = key
+					.split('')
+					.filter(el => isNaN(Number(el)))
+					.join('')
+				let correctly = state.spellCheckOpt.filter(el => el.id == id[0])
+				return {
+					id: id[0],
+					time: timeId,
+					myVersion: value,
+					original: correctly[0][timeId],
+					translate: correctly[0].translate,
+				}
+			})
+			return {
+				...state,
+				showResult: examen,
+			}
+		case SET_ALL_VERB:
+			return {
+				...state,
+
+				spellCheckOpt: [...state.dataVerb],
+			}
+		default:
+			return state
+	}
+}
+
+type ExecuteSimplePresentType = { type: typeof SIMPLE_PRESENT_SIMPLEST }
+export const executeSimplePresent = (): ExecuteSimplePresentType => ({
+	type: SIMPLE_PRESENT_SIMPLEST,
+})
+
+type AddFormDataType = {
+	type: typeof ADD_FORM_DATA
+	name: string
+	verb: string
+}
+export const addFormData = (name: string, verb: string): AddFormDataType => ({
+	type: ADD_FORM_DATA,
+	name,
+	verb,
+})
+
+type AddPackageWordType = {
+	type: typeof ADD_PACKAGE_WORD
+	id: number
+}
+export const addPackageWord = (id: number): AddPackageWordType => ({
+	type: ADD_PACKAGE_WORD,
+	id,
+})
+
+type SetIdiomType = {
+	type: typeof SET_IDIOM
+	id: number
+}
+export const setIdiom = (id: number): SetIdiomType => ({
+	type: SET_IDIOM,
+	id,
+})
+
+type AddWordReviewType = {
+	type: typeof ADD_FOR_REVIEW
+	word: string
+}
+export const addWordReview = (word: string): AddWordReviewType => ({
+	type: ADD_FOR_REVIEW,
+	word,
+})
+
+type ShowResultACType = {
+	type: typeof SHOW_RESULT
+}
+export const showResultAC = (): ShowResultACType => ({
+	type: SHOW_RESULT,
+})
+
+type SetAllVerbType = {
+	type: typeof SET_ALL_VERB
+}
+export const setAllVerb = (): SetAllVerbType => ({
+	type: SET_ALL_VERB,
+})
+
+export default wordsReducer
+
 // let initialState = {
 // 	countTmp: 0,
 // 	temporaryVerb: [],
@@ -324,115 +490,3 @@ let initialState = {
 // 		['fail'],
 // 	],
 // }
-
-const wordsReducer = (state = initialState, action) => {
-	switch (action.type) {
-		case SIMPLE_PRESENT_SIMPLEST:
-			let randomName = capitalize(random(state.nameFromForm))
-			let randomVerb = random(state.verbFromForm)
-			return {
-				...state,
-				name: randomName,
-				verb: randomVerb,
-			}
-
-		case ADD_FORM_DATA:
-			return {
-				...state,
-				nameFromForm: [...state.nameFromForm, ...action.name.split(', ')],
-				verbFromForm: action.verb.split(', '),
-			}
-		case ADD_PACKGE_WORD:
-			let soughtAfterPackage = state.dataVerb.filter(
-				verbPackage => action.id === verbPackage.id
-			)
-			if (state.spellCheckOpt.some(el => el.id === action.id)) {
-				let newArrey = state.spellCheckOpt.filter(el => el.id !== action.id)
-				return {
-					...state,
-					spellCheckOpt: [...newArrey],
-				}
-			} else {
-				return {
-					...state,
-					spellCheckOpt: [...state.spellCheckOpt, ...soughtAfterPackage],
-				}
-			}
-		case SET_IDIOM:
-			let ac = action.id
-			let findForId = state.idioms.filter(idiom => idiom.id == ac)
-			return {
-				...state,
-				certainIdiom: findForId[0],
-			}
-
-		case ADD_FOR_REIVIEW:
-			let r = action.word
-			return {
-				...state,
-				examen: [...state.examen, action.word],
-			}
-
-		case SHOW_RESULT:
-			let opt = state.spellCheckOpt
-			let examen = state.examen.map(knowledge => {
-				let value = Object.values(knowledge)[0]
-				let key = Object.keys(knowledge)[0]
-				let id = key.match(/\d+/)
-				let timeId = key
-					.split('')
-					.filter(el => isNaN(Number(el)))
-					.join('')
-				let correctly = state.spellCheckOpt.filter(el => el.id == id)
-				return {
-					id: id[0],
-					time: timeId,
-					myVersion: value,
-					original: correctly[0][timeId],
-					translate: correctly[0].translate,
-				}
-			})
-			return {
-				...state,
-				showResult: examen,
-			}
-		case SET_ALL_VERB:
-			return {
-				...state,
-
-				spellCheckOpt: [...state.dataVerb],
-			}
-		default:
-			return state
-	}
-}
-
-export const executeSimplePresent = () => ({ type: SIMPLE_PRESENT_SIMPLEST })
-export const addFormData = (name, verb) => ({
-	type: ADD_FORM_DATA,
-	name,
-	verb,
-})
-export const addPackageWord = id => ({
-	type: ADD_PACKGE_WORD,
-	id,
-})
-export const setIdiom = id => ({
-	type: SET_IDIOM,
-	id,
-})
-
-export const addWordReview = word => ({
-	type: ADD_FOR_REIVIEW,
-	word,
-})
-
-export const showResultAC = () => ({
-	type: SHOW_RESULT,
-})
-
-export const setAllVerb = () => ({
-	type: SET_ALL_VERB,
-})
-
-export default wordsReducer
