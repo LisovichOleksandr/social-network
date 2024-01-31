@@ -8,7 +8,7 @@ const ADD_FOR_REVIEW = 'words/ADD_FOR_REIVIEW'
 const SHOW_RESULT = 'words/SHOW_RESULT'
 const SET_ALL_VERB = 'words/SET_ALL_VERB'
 
-type DataVerbType = {
+export type DataVerbType = {
 	id: number
 	baseForm: string
 	translate: string
@@ -22,14 +22,6 @@ type IdiomType = {
 	idiom: string
 	description: string
 	example: string
-}
-
-type ShowResultType = {
-	id: number
-	time: string
-	myVersion: string
-	original: string
-	translate: string
 }
 
 let initialState = {

@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import classes from './ProfileInfo.module.css'
+import styles from './ProfileInfo.module.css'
 import Preloader from '../../common/preloader/preloader'
 import ProfileStatus from './profileStatus/profileStatus'
 import ava from '../../../assets/images/Untitled.png'
 import ProfileDataForm from './ProfileDataForm'
+import { postProfileDataThunk } from '../../../redux/profileReducer.ts'
 
 const ProfileInfo = props => {
 	const [editMode, setEditMode] = useState(false)
@@ -16,11 +17,16 @@ const ProfileInfo = props => {
 		if (e.target.files.length) props.savePhoto(e.target.files[0])
 	}
 
+	const onSubmit = formData => {
+		props.saveProfile(formData)
+		setEditMode(false)
+	}
+
 	return (
 		<div>
 			start
 			{/* HEADER */}
-			<div className={classes.mainImg}>
+			<div className={styles.mainImg}>
 				<img
 					src='http://ogotour.com.ua/wp-content/uploads/sites/144/2021/04/more-2.jpg'
 					alt='My Awesome Image'
@@ -34,7 +40,8 @@ const ProfileInfo = props => {
 					updateStatus={props.updateStatus}
 				/>
 			</div>
-			<div className={classes.ava}>
+			{/* JS 97 */}
+			<div className={styles.ava}>
 				<div>
 					<img src={props.profile.photos.large || ava} alt='' />
 					<br />
@@ -43,7 +50,7 @@ const ProfileInfo = props => {
 					)}
 				</div>
 				{editMode ? (
-					<ProfileDataForm profile={props.profile} />
+					<ProfileDataForm initialValues={props.profile} onSubmit={onSubmit} />
 				) : (
 					<ProfileData
 						profile={props.profile}
@@ -55,7 +62,7 @@ const ProfileInfo = props => {
 				)}
 			</div>
 			{/* STATUS */}
-			<div className={classes.status}>
+			<div className={styles.status}>
 				<h3>
 					„Если вы измеряете свой успех мерой чужих похвал и порицаний, ваша
 					тревога будет бесконечной.
@@ -94,16 +101,11 @@ const ProfileData = props => {
 				<b>About me:</b> {props.profile.aboutMe}
 			</div>
 			<div>
-				<b>Looking for a job:</b> {props.profile.lookingForAJob ? 'yes' : 'no'}
-			</div>
-			<div>
-				{Object.keys(props.profile.contacts).map(key => {
+				{Object.keys(props.profile.contacts).map((key, i) => {
 					return (
-						<Contacts
-							key={key}
-							contactTitle={key}
-							contactValue={props.profile.contacts[key]}
-						/>
+						<div key={key} className={styles.contact}>
+							<b>{key}</b>:{props.profile.contacts[key]}{' '}
+						</div>
 					)
 				})}
 			</div>
@@ -112,12 +114,7 @@ const ProfileData = props => {
 }
 
 const Contacts = (contactTitle, contactValue) => {
-	return (
-		<div>
-			{/* {contactTitle}:
-		{contactValue} */}
-		</div>
-	)
+	return <div></div>
 }
 
 export default ProfileInfo

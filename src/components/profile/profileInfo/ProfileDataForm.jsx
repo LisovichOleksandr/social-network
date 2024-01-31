@@ -1,33 +1,40 @@
+import { reduxForm } from 'redux-form'
+import {
+	Input,
+	Textarea,
+	createField,
+} from '../../common/formsControls/formsControls.tsx'
 
-const ProfileDataForm = (props) => {
+const ProfileDataForm = props => {
 	return (
-		<form>
-					<div>
-						<button onClick={props.save}>Save</button>
-					</div> 
-					<div>
-						<b>Full name:</b> {props.profile.fullName}
-					</div>
-					<div>
-						<b>Looking for a job:</b> {props.profile.lookingForAJob ? 'yes': 'no'}
-					</div>
-					{props.profile.lookingForAJob &&
-					<div>
-						<b>My professional skills:</b> {props.profile.lookingForAJobDescription}
-					</div>}
-					
-					<div>
-						<b>About me:</b> {props.profile.aboutMe}
-					</div>
-					<div>
-						<b>Looking for a job:</b> {props.profile.lookingForAJob ? 'yes': 'no'}
-					</div>
-					{/* <div>
-						{Object.keys(props.profile.contacts).map(key =>{
-							return <Contacts key={key} contactTitle={key} contactValue={props.profile.contacts[key]}/>})}
-					</div> */}
+		<form onSubmit={props.handleSubmit}>
+			<div>
+				<button>Save</button>
+			</div>
+			<div>
+				<b>Full name:</b> {createField(Input, 'fullName', 'Full Name', [])}
+			</div>
+			<div>
+				<b>Looking for a job:</b>{' '}
+				{createField(Input, 'lookingForAJob', '', [], { type: 'checkbox' })}
+			</div>
+			<div>
+				<b>My professional skills:</b>
+				{createField(
+					Textarea,
+					'lookingForAJobDescription',
+					'My professional skills',
+					[]
+				)}
+			</div>
+			<div>
+				<b>About me:</b>
+				{createField(Textarea, 'aboutMe', 'About me', [])}
+			</div>
 		</form>
 	)
 }
-
-export default ProfileDataForm
+const ProfileReduxDataForm = reduxForm({ form: 'edit-profile' })(
+	ProfileDataForm
+)
+export default ProfileReduxDataForm

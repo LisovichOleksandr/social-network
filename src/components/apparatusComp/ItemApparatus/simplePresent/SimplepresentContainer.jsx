@@ -1,11 +1,14 @@
-import React from 'react'
+import { connect } from 'react-redux'
 import {
 	addFormData,
 	executeSimplePresent,
 } from '../../../../redux/wordsReducer.ts'
-import SimplePresent from './Simplepresent'
-import { connect } from 'react-redux'
-import { getName, getVerb, getVerbTwo } from '../../../../redux/wordsSelector'
+import {
+	getName,
+	getVerb,
+	getVerbTwo,
+} from '../../../../redux/wordsSelector.ts'
+import SimplePresent from './SimplePresent.jsx'
 
 const mapStateToProps = state => {
 	return {

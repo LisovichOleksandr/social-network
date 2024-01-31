@@ -1,58 +1,64 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "https://lisovicholeksandr.github.io/social-network",
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^29.5.11",
-    "@types/node": "^20.10.8",
-    "@types/react": "^18.2.47",
-    "@types/react-dom": "^18.2.18",
-    "axios": "^1.5.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-redux": "^8.0.7",
-    "react-router-dom": "^6.11.1",
-    "react-scripts": "5.0.1",
-    "react-youtube": "^10.1.0",
-    "redux": "^4.2.1",
-    "redux-form": "^8.3.10",
-    "redux-thunk": "^2.4.2",
-    "reselect": "^4.1.8",
-    "typescript": "^5.3.3",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "gh-pages": "^6.1.0"
-  }
+	"name": "my-app",
+	"version": "0.1.0",
+	"private": true,
+	"homepage": "https://lisovicholeksandr.github.io/social-network",
+	"dependencies": {
+		"@testing-library/jest-dom": "^5.16.5",
+		"@testing-library/react": "^13.4.0",
+		"@testing-library/user-event": "^13.5.0",
+		"@types/jest": "^29.5.11",
+		"@types/node": "^20.10.8",
+		"@types/react": "^18.2.47",
+		"@types/react-dom": "^18.2.18",
+		"axios": "^1.5.1",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-redux": "^8.0.7",
+		"react-router-dom": "^6.11.1",
+		"react-scripts": "5.0.1",
+		"react-youtube": "^10.1.0",
+		"redux": "^4.2.1",
+		"redux-form": "^8.3.10",
+		"redux-thunk": "^2.4.2",
+		"reselect": "^4.1.8",
+		"typescript": "^5.3.3",
+		"web-vitals": "^2.1.4"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build"
+	},
+	"jest": {
+		"moduleNameMapper": {
+			"^axios$": "axios/dist/node/axios.cjs"
+		}
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+		"@babel/plugin-syntax-dynamic-import": "^7.8.3",
+		"gh-pages": "^6.1.0"
+	}
 }

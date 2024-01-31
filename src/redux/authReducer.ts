@@ -1,5 +1,8 @@
-import { stopSubmit } from 'redux-form'
-import { authAPI, profileAPI } from '../api/api'
+import { ActionTypes, stopSubmit } from 'redux-form'
+import { ThunkAction } from 'redux-thunk'
+
+import { ResultCodeUnum, authAPI, profileAPI } from '../api/api.ts'
+import { AppStateType } from './reduxStore'
 
 const SET_USER_DATA = 'auth/SET_USER_DATA'
 const SET_CURRENT_USER_DATA = 'auth/SET_CURRENT_USER_DATA'
@@ -20,30 +23,27 @@ let initialState: InitialStateType = {
 	info: null,
 }
 
-const authReducer = (state = initialState, action: any): InitialStateType => {
-	// let stateCopy: InitialStateType
+const authReducer = (
+	state = initialState,
+	action: ActionsType
+): InitialStateType => {
 	switch (action.type) {
 		case SET_USER_DATA:
-			// stateCopy =
 			return {
 				...state,
 				...action.payload,
 			}
-
-		// return stateCopy
-
 		case SET_CURRENT_USER_DATA:
-			// stateCopy =
 			return {
 				...state,
 				info: action.info,
 			}
-
-		// return stateCopy
 		default:
 			return state
 	}
 }
+
+type ActionsType = SetAuthUserDataActionType | SetCurrentAuthUserDataType
 
 type SetAuthUserDataActionPayloadType = {
 	id: number | null
@@ -66,42 +66,51 @@ export const setAuthUserData = (
 	type: SET_USER_DATA,
 	payload: { id, email, login, isAuth },
 })
-export const setCurrentAuthUserData = (info: string) => ({
+
+type SetCurrentAuthUserDataType = {
+	type: typeof SET_CURRENT_USER_DATA
+	info: string
+}
+
+export const setCurrentAuthUserData = (
+	info: string
+): SetCurrentAuthUserDataType => ({
 	type: SET_CURRENT_USER_DATA,
 	info,
 })
 
-export const getAuthUserData = () => async (dispatch: any) => {
-	let response = await authAPI.me()
-	if (response.data.resultCode === 0) {
-		let { id, email, login } = response.data.data
+// THUNK
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsType>
+
+export const getAuthUserData = (): ThunkType => async dispatch => {
+	let meData = await authAPI.me()
+
+	if (meData.resultCode === ResultCodeUnum.Success) {
+		let { id, email, login } = meData.data
 		dispatch(setAuthUserData(id, email, login, true))
-		let res = await profileAPI.getProfile(response.data.data.id)
-		dispatch(setCurrentAuthUserData(res.data.userId))
+		let res = await profileAPI.getProfile(meData.data.id)
+		dispatch(setCurrentAuthUserData(String(res.data.userId)))
 	}
 }
 
 export const login =
-	(email: string, password: string, rememberMe: boolean) =>
+	(email: string, password: string, rememberMe: boolean): ThunkType =>
 	async (dispatch: any) => {
-		let response = await authAPI.login(email, password, rememberMe)
-		if (response.data.resultCode === 0) {
+		let loginData = await authAPI.login(email, password, rememberMe)
+		if (loginData.resultCode === ResultCodeUnum.Success) {
 			dispatch(getAuthUserData())
 		} else {
 			let message =
-				response.data.messages.length > 0
-					? response.data.messages[0]
-					: 'Some error'
+				loginData.messages.length > 0 ? loginData.messages[0] : 'Some error'
 			dispatch(stopSubmit('login', { _error: message }))
 		}
 	}
 
-export const logout = () => (dispatch: any) => {
-	authAPI.logout().then(response => {
-		if (response.data.resultCode === 0) {
-			dispatch(setAuthUserData(null, null, null, false))
-		}
-	})
+export const logout = (): ThunkType => async dispatch => {
+	let response = await authAPI.logout()
+	if (response.data.resultCode === 0) {
+		dispatch(setAuthUserData(null, null, null, false))
+	}
 }
 
 export default authReducer

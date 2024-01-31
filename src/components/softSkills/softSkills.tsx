@@ -1,7 +1,9 @@
+import React, { FC } from 'react'
+
 import NavSoftSkills from './navSoftSkills/navSoftSkills'
 import styles from './softSkills.module.css'
 
-const SoftSkills = () => {
+const SoftSkills: FC = () => {
 	return (
 		<div className={styles.soft__skills}>
 			<h2>SOFT SKILLS: How have asked Albert</h2>

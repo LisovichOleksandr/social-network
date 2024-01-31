@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
+
 import Idioms from './idioms'
-import { getIdioms } from '../../../../redux/wordsSelector'
+import { getIdioms } from '../../../../redux/wordsSelector.ts'
 import { setIdiom } from '../../../../redux/wordsReducer.ts'
 
 const mapStateToProps = state => {

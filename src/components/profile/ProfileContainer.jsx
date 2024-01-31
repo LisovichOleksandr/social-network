@@ -1,21 +1,23 @@
 import React from 'react'
-import Profile from './Profile'
 import { connect } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { compose } from 'redux'
+
+import withAuthRedirect from '../../hoc/redirect'
+
 import {
+	getStatus,
+	getUserCurrent,
 	savePhoto,
+	saveProfile,
 	setUserProfile,
 	updateStatus,
-	getUserCurrent,
-	getStatus,
 } from '../../redux/profileReducer.ts'
 import { setCurrentPage } from '../../redux/usersReducer.ts'
-import { useParams } from 'react-router-dom'
-// import { getUserCurrent } from '../../redux/profileReducer'
-// import { getStatus } from '../../redux/profileReducer'
-import withAuthRedirect from '../../hoc/redirect'
-import { compose } from 'redux'
-import { getProfile, getStatusSelector } from '../../redux/profileSelector'
-import { getAuthorizedUserId, getIsAuth } from '../../redux/authSelector'
+import Profile from './Profile.tsx'
+
+import { getAuthorizedUserId, getIsAuth } from '../../redux/authSelector.ts'
+import { getProfile, getStatusSelector } from '../../redux/profileSelector.ts'
 
 export const withRouter = Children => {
 	return props => {
@@ -56,6 +58,7 @@ class ProfileContainer extends React.Component {
 				profile={this.props.profile}
 				status={this.props.status}
 				updateStatus={this.props.updateStatus}
+				saveProfile={this.props.saveProfile}
 			/>
 		)
 	}
@@ -73,11 +76,12 @@ const mapStateToProps = state => {
 export default compose(
 	connect(mapStateToProps, {
 		setUserProfile,
-		setCurrentPage,
+		setCurrentPage: setCurrentPage,
 		getUserCurrent,
 		getStatus,
 		updateStatus,
 		savePhoto,
+		saveProfile,
 	}),
 	withRouter,
 	withAuthRedirect

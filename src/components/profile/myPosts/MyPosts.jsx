@@ -1,35 +1,46 @@
-import React from 'react';
-import { Field, reduxForm } from "redux-form"
+import React from 'react'
+import { Field, reduxForm } from 'redux-form'
 import classes from './MyPosts.module.css'
-import Post from '../post/Post';
-import { required, maxLengthCreator  } from '../../../utils/validators/validators';
-import {Textarea} from '../../common/formsControls/formsControls';
+import Post from '../post/Post'
+import {
+	required,
+	maxLengthCreator,
+} from '../../../utils/validators/validators'
+import { Textarea } from '../../common/formsControls/formsControls.tsx'
 
 let maxLengthCreator100 = maxLengthCreator(100)
 
-const PostForm = (props) => {
-	return <form onSubmit={props.handleSubmit}>
-	<div>
-		<Field placeholder={"Write me please post"} name={'post'} component={Textarea} 
-			validate={[maxLengthCreator100, required]} />
-	</div>
-	<div className={classes.but}>
-		<button>Add Post</button>
-	</div>
-</form>
+const PostForm = props => {
+	return (
+		<form onSubmit={props.handleSubmit}>
+			<div>
+				<Field
+					placeholder={'Write me please post'}
+					name={'post'}
+					component={Textarea}
+					validate={[maxLengthCreator100, required]}
+				/>
+			</div>
+			<div className={classes.but}>
+				<button>Add Post</button>
+			</div>
+		</form>
+	)
 }
 
-const PostReduxForm = reduxForm({form: 'post'})(PostForm)
+const PostReduxForm = reduxForm({ form: 'post' })(PostForm)
 
-const MyPosts = (props) => {
+const MyPosts = props => {
 	let postElements = [...props.postData]
-								.reverse()
-								.map((post, id) => <Post key={id} message={post.post} likesCount={post.likesCount} />)
+		.reverse()
+		.map((post, id) => (
+			<Post key={id} message={post.post} likesCount={post.likesCount} />
+		))
 
-const onSubmit = (data) => {
-	props.addPost(data.post)
-}
-console.log('RENDER')
+	const onSubmit = data => {
+		props.addPost(data.post)
+	}
+	console.log('RENDER')
 	return (
 		<div className={classes.postsBlock}>
 			<h3>Mu posts</h3>
@@ -38,7 +49,7 @@ console.log('RENDER')
 				{postElements}
 				{/* {post} */}
 			</div>
-		</div >
+		</div>
 	)
 }
 

@@ -6,7 +6,7 @@ import {
 	getItemWithOpt,
 	getShowResult,
 	getSpellCheckOpt,
-} from '../../../../redux/wordsSelector'
+} from '../../../../redux/wordsSelector.ts'
 import {
 	addPackageWord,
 	addWordReview,

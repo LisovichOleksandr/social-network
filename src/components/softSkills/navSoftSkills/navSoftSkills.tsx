@@ -1,7 +1,9 @@
+import React, { FC } from 'react'
 import { NavLink } from 'react-router-dom'
+
 import styles from './navSoftSkills.module.css'
 
-const NavSoftSkills = () => {
+const NavSoftSkills: FC = () => {
 	return (
 		<div>
 			<nav className={styles.headApparatNav}>

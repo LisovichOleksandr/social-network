@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
+
 import DisplayEtymology from './displayEtymology'
-import { getEtymologyData } from '../../../../../redux/etymologySelector'
+import { getEtymologyData } from '../../../../../redux/etymologySelector.ts'
 
 const mapStateToProps = state => {
 	return {

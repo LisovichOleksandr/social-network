@@ -1,11 +1,8 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 import classes from './Navbar.module.css'
-import DialogItem from '../dialogs/dialogItem/DialogsItem'
-import FriendsThre from '../friends/Friends'
-import Friends from '../friends/Friends'
 
-const Navbar = props => (
+const Navbar: FC = props => (
 	<nav className={classes.nav}>
 		<div className={classes.item}>
 			<NavLink to='/profile' activeclassname={classes.active}>

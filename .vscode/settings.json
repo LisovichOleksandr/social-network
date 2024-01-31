@@ -2,7 +2,7 @@
 	//Main editor settings
 	"window.openFilesInNewWindow": "off",
 	"editor.tabSize": 2,
-	"editor.folding": false,
+	"editor.folding": true,
 	"editor.insertSpaces": false,
 	"editor.smoothScrolling": true,
 	"editor.minimap.enabled": false,
@@ -43,7 +43,7 @@
 	// "workbench.productIconTheme": "fluent-icons",
 	"window.density.editorTabHeight": "compact",
 	"workbench.activityBar.location": "top",
-	"workbench.colorTheme": "Solarized Dark",
+	"workbench.colorTheme": "Cotion Theme",
 	"editor.accessibilitySupport": "off",
 	"window.commandCenter": false,
 	"workbench.layoutControl.enabled": false,
@@ -57,7 +57,7 @@
 
 	// Font
 	"editor.fontSize": 15,
-	"editor.fontWeight": 900,
+	"editor.fontWeight": 300,
 	"editor.lineHeight": 20,
 	"editor.fontLigatures": true,
 	"editor.fontFamily": "Monaspace Neon, MonoLisa, Operator mono lig, Iosevka NFM, JetBrains Mono,  Maple Mono, Ubuntu Mono, DejaVu Sans Mono, Fira Code, monoki, Hasklig, PragmataPro, IBM Plex Mono, Victor Mono, Roboto Mono, monospace",
@@ -99,7 +99,7 @@
 	//Terminal
 	"terminal.integrated.fontFamily": "monospace",
 	"terminal.integrated.fontSize": 15,
-	"terminal.integrated.tabs.enabled": false,
+	"terminal.integrated.tabs.enabled": true,
 
 	//Explorer
 	// "explorer.confirmDelete": false,

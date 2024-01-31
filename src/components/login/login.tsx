@@ -1,17 +1,27 @@
 import { connect } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-import { reduxForm } from 'redux-form'
+import { reduxForm, InjectedFormProps } from 'redux-form'
+
 import { login } from '../../redux/authReducer.ts'
-import { getIsAuth } from '../../redux/authSelector'
-import { maxLengthCreator, required } from '../../utils/validators/validators'
+import { getIsAuth } from '../../redux/authSelector.ts'
+
+import {
+	maxLengthCreator,
+	required,
+} from '../../utils/validators/validators.js'
+import { Input, createField } from '../common/formsControls/formsControls.tsx'
+
 import style from '../common/formsControls/formControls.module.css'
-import { Input, createField } from '../common/formsControls/formsControls'
 import s from './login.module.css'
+import { AppStateType } from '../../redux/reduxStore.js'
 
 const maxLogin30 = maxLengthCreator(30)
 const maxPassword15 = maxLengthCreator(15)
 
-const LoginForm = ({ handleSubmit, error }) => {
+const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType>> = ({
+	handleSubmit,
+	error,
+}) => {
 	return (
 		<form onSubmit={handleSubmit}>
 			{createField(Input, 'login', 'Email', [required, maxLogin30])}
@@ -28,25 +38,6 @@ const LoginForm = ({ handleSubmit, error }) => {
 				},
 				'remember me'
 			)}
-			{/* <Field
-					placeholder={'Email'}
-					name={'login'}
-					component={Input}
-					validate={[required, maxLogin30]}
-				/> */}
-			{/* <div>
-				<Field
-					placeholder={'Password'}
-					name={'password'}
-					type={'password'}
-					component={Input}
-					validate={[required, maxPassword15]}
-				/>
-			</div> */}
-			{/* <div>
-				<Field type={'checkbox'} name={'rememberMe'} component={Input} />{' '}
-				remember me
-			</div> */}
 			{error && <div className={style.form__summary__error}>{error}</div>}
 			<div className={s.but}>
 				<button>Login</button>
@@ -55,18 +46,30 @@ const LoginForm = ({ handleSubmit, error }) => {
 	)
 }
 /********************************************************* */
-const LoginReduxForm = reduxForm({
-	// a unique name for the form
-	form: 'login',
-})(LoginForm)
+const LoginReduxForm = reduxForm<LoginFormValuesType>({ form: 'login' })(
+	LoginForm
+)
 
 /************************************************************ */
 
-const Login = ({ login, isAuth }) => {
-	const onSubmit = formData => {
-		login(formData.login, formData.password, formData.rememberMe)
+type MapStateToPropsType = {
+	isAuth: boolean
+}
+
+type MapDispatchToPropsType = {
+	login: (email: string, password: string, rememberMe: boolean) => void
+}
+
+type LoginFormValuesType = {
+	login: string
+	password: string
+	rememberMe: boolean
+}
+const Login: React.FC<MapStateToPropsType & MapDispatchToPropsType> = props => {
+	const onSubmit = (formData: LoginFormValuesType) => {
+		props.login(formData.login, formData.password, formData.rememberMe)
 	}
-	if (isAuth) {
+	if (props.isAuth) {
 		return <Navigate to={'/profile'} />
 	}
 	return (
@@ -77,7 +80,7 @@ const Login = ({ login, isAuth }) => {
 	)
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 	isAuth: getIsAuth(state),
 })
 

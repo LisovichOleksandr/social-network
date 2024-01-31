@@ -16,7 +16,7 @@ import profileReducer from './profileReducer.ts'
 import usersReducer from './usersReducer.ts'
 import wordsReducer from './wordsReducer.ts'
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
 	profilePage: profileReducer,
 	messagesPage: dialogsReducer,
 	musicPage: musicReducer,
@@ -29,13 +29,18 @@ let reducers = combineReducers({
 	etymology: etymologyReducer,
 })
 
+type RootReducerType = typeof rootReducer
+export type AppStateType = ReturnType<RootReducerType>
+
+// @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
-	reducers,
+	rootReducer,
 	composeEnhancers(applyMiddleware(thunkMiddleware))
 )
 
 // let store = createStore(reducers, applyMiddleware(thunkMiddleware))
+// @ts-ignore
 window.store = store
 
 export default store

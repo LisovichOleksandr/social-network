@@ -11,7 +11,6 @@ const musicReducer = (state = initialState, action: any): InitialStateType => {
 		case UPDATE_MUSIC_SEARCH_TEXT:
 			return {
 				...state,
-				searchText: action.newText,
 			}
 
 		default:

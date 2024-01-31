@@ -1,7 +1,7 @@
-import React from "react"
-import classes from "./Settings.module.css"
+import React, { FC } from 'react'
+import classes from './Settings.module.css'
 
-const Settings = (props) => {
+const Settings: FC = props => {
 	const handleClick = () => {
 		console.log('handleClick')
 	}
@@ -12,7 +12,5 @@ const Settings = (props) => {
 		</div>
 	)
 }
-
-
 
 export default Settings

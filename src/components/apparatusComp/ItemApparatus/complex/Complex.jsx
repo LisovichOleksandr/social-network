@@ -1,10 +1,8 @@
-import React from "react"
-import classes from "./Complex.module.css"
-import Navetr from "../../navApparatus/Navetr"
+import React from 'react'
+import classes from './Complex.module.css'
+import Navetr from '../../navApparatus/Navetr'
 
-
-const Complex = (props) => {
-
+const Complex = props => {
 	let state = props.state
 	const nextComplex = () => {
 		props.executeComplex()
@@ -14,9 +12,7 @@ const Complex = (props) => {
 			<Navetr />
 			<h2>Complex</h2>
 			<h3>English Trening Apparatus</h3>
-			<p>{state.arrTemporary.at(-1)}</p>
-			<button onClick={nextComplex}>Next</button>
-		</div >
+		</div>
 	)
 }
 
