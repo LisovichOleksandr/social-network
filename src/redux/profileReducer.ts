@@ -1,8 +1,8 @@
 import { ThunkAction } from 'redux-thunk'
 
-import { profileAPI } from '../api/api.ts'
 import { PhotosType, PostDataType, ProfileType } from '../types/types'
 import { AppStateType } from './reduxStore'
+import { profileAPI } from '../api/profile-api.ts'
 
 const ADD_POST = 'profile/ADD-POST'
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE'
@@ -140,22 +140,22 @@ type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsType>
 export const getUserCurrent =
 	(userId: number): ThunkType =>
 	async dispatch => {
-		let response = await profileAPI.getProfile(userId)
-		dispatch(setUserProfile(response.data))
+		let data = await profileAPI.getProfile(userId)
+		dispatch(setUserProfile(data))
 	}
 
 export const getStatus =
 	(userId: number): ThunkType =>
 	async dispatch => {
-		let response = await profileAPI.getStatus(userId)
-		dispatch(setStatus(response.data))
+		let data = await profileAPI.getStatus(userId)
+		dispatch(setStatus(data))
 	}
 
 export const updateStatus =
 	(status: string): ThunkType =>
 	async dispatch => {
-		let response = await profileAPI.updateStatus(status)
-		if (response.data.resultCode === 0) {
+		let data = await profileAPI.updateStatus(status)
+		if (data.resultCode === 0) {
 			dispatch(setStatus(status))
 		}
 	}
@@ -163,9 +163,9 @@ export const updateStatus =
 export const savePhoto =
 	(file: PhotosType): ThunkType =>
 	async dispatch => {
-		let response = await profileAPI.savePhoto(file)
-		if (response.data.resultCode === 0) {
-			dispatch(savePhotoSuccess(response.data.data.photos))
+		let res = await profileAPI.savePhoto(file)
+		if (res.resultCode === 0) {
+			dispatch(savePhotoSuccess(res.data.photos))
 		}
 	}
 
@@ -173,9 +173,8 @@ export const saveProfile =
 	(profile: any): ThunkType =>
 	async (dispatch, getState) => {
 		const id = getState().auth.id
-		const response = await profileAPI.saveProfile(profile)
-		debugger
-		if (response.data.resultCode === 0) {
+		const data = await profileAPI.saveProfile(profile)
+		if (data.resultCode === 0) {
 			dispatch(getUserCurrent(Number(id)))
 		}
 	}

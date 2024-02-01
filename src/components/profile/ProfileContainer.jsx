@@ -13,7 +13,7 @@ import {
 	setUserProfile,
 	updateStatus,
 } from '../../redux/profileReducer.ts'
-import { setCurrentPage } from '../../redux/usersReducer.ts'
+import { actions } from '../../redux/usersReducer.ts'
 import Profile from './Profile.tsx'
 
 import { getAuthorizedUserId, getIsAuth } from '../../redux/authSelector.ts'
@@ -76,7 +76,7 @@ const mapStateToProps = state => {
 export default compose(
 	connect(mapStateToProps, {
 		setUserProfile,
-		setCurrentPage: setCurrentPage,
+		setCurrentPage: actions.setCurrentPage,
 		getUserCurrent,
 		getStatus,
 		updateStatus,

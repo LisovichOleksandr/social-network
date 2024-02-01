@@ -1,8 +1,10 @@
 import { ActionTypes, stopSubmit } from 'redux-form'
 import { ThunkAction } from 'redux-thunk'
 
-import { ResultCodeUnum, authAPI, profileAPI } from '../api/api.ts'
+import { ResultCodeUnum } from '../api/api.ts'
 import { AppStateType } from './reduxStore'
+import { authAPI } from '../api/auth-api.ts'
+import { profileAPI } from '../api/profile-api.ts'
 
 const SET_USER_DATA = 'auth/SET_USER_DATA'
 const SET_CURRENT_USER_DATA = 'auth/SET_CURRENT_USER_DATA'
@@ -89,7 +91,7 @@ export const getAuthUserData = (): ThunkType => async dispatch => {
 		let { id, email, login } = meData.data
 		dispatch(setAuthUserData(id, email, login, true))
 		let res = await profileAPI.getProfile(meData.data.id)
-		dispatch(setCurrentAuthUserData(String(res.data.userId)))
+		dispatch(setCurrentAuthUserData(String(res.userId)))
 	}
 }
 

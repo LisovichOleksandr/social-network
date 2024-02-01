@@ -1,5 +1,7 @@
-import { Field } from 'redux-form'
+import React, { FC } from 'react'
+import { Field, WrappedFieldProps } from 'redux-form'
 import classes from './formControls.module.css'
+import { FieldValidatorType } from '../../../utils/validators/validators'
 
 export const Textarea = ({ input, meta, ...props }) => {
 	const hasError = meta.touched && meta.error
@@ -15,7 +17,14 @@ export const Textarea = ({ input, meta, ...props }) => {
 	)
 }
 
-export const Input = ({ input, meta, ...props }) => {
+type InputPropsType = {
+	meta: {
+		touched: boolean
+		error: string
+	}
+}
+
+export const Input: FC<WrappedFieldProps> = ({ input, meta, ...props }) => {
 	const hasError = meta.touched && meta.error
 	return (
 		<div
@@ -29,25 +38,27 @@ export const Input = ({ input, meta, ...props }) => {
 	)
 }
 
-export const createField = (
-	component,
-	name,
-	placeholder,
-	validate,
+export function createField<FormKeysType extends string>(
+	component: React.FC<WrappedFieldProps>,
+	name: FormKeysType,
+	placeholder: string | undefined,
+	validate: Array<FieldValidatorType>,
 	props = {},
 	text = ''
-) => (
-	<div>
-		<Field
-			placeholder={placeholder}
-			name={name}
-			component={component}
-			validate={validate}
-			{...props}
-		/>{' '}
-		{text}
-	</div>
-)
+) {
+	return (
+		<div>
+			<Field
+				placeholder={placeholder}
+				name={name}
+				component={component}
+				validate={validate}
+				{...props}
+			/>{' '}
+			{text}
+		</div>
+	)
+}
 
 //  const hoc = (Children, <element />) => {
 // 	Children = ({input, meta, ...props}) => {

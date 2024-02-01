@@ -6,7 +6,7 @@ import { AppStateType } from '../../redux/reduxStore'
 import {
 	follow,
 	getUsers,
-	setCurrentPage,
+	actions,
 	unFollow,
 } from '../../redux/usersReducer.ts'
 import {
@@ -91,7 +91,7 @@ export default compose(
 			follow,
 			unFollow,
 			getUsers,
-			setCurrentPage: setCurrentPage,
+			setCurrentPage: actions.setCurrentPage,
 		}
 	),
 	withAuthRedirect

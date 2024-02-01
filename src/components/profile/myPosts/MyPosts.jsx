@@ -1,12 +1,12 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import classes from './MyPosts.module.css'
-import Post from '../post/Post'
 import {
-	required,
 	maxLengthCreator,
-} from '../../../utils/validators/validators'
+	required,
+} from '../../../utils/validators/validators.ts'
 import { Textarea } from '../../common/formsControls/formsControls.tsx'
+import Post from '../post/Post'
+import classes from './MyPosts.module.css'
 
 let maxLengthCreator100 = maxLengthCreator(100)
 

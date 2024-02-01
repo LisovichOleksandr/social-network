@@ -1,13 +1,4 @@
-import {
-	InitialStateUserType,
-	followSuccess,
-	setCurrentPage,
-	setTotalUsersCount,
-	setUsers,
-	togglePreloader,
-	unFollowSuccess,
-	usersReducer,
-} from './usersReducer'
+import { InitialStateUserType, actions, usersReducer } from './usersReducer'
 // TEST-1
 test('should be set followed true for user ', () => {
 	const startState: InitialStateUserType = {
@@ -42,7 +33,7 @@ test('should be set followed true for user ', () => {
 		followingInProgress: false,
 	}
 
-	const action = followSuccess(1)
+	const action = actions.followSuccess(1)
 
 	const endState = usersReducer(startState, action)
 
@@ -83,7 +74,7 @@ test('should be set followed false for user ', () => {
 		followingInProgress: false,
 	}
 
-	const action = unFollowSuccess(1)
+	const action = actions.unFollowSuccess(1)
 
 	const endState = usersReducer(startState, action)
 
@@ -101,7 +92,7 @@ test('should be set users in state', () => {
 		followingInProgress: false,
 	}
 
-	const action = setUsers([
+	const action = actions.setUsers([
 		{
 			name: 'one',
 			followed: false,
@@ -128,7 +119,7 @@ test('should be set current page of user paginator in state', () => {
 		followingInProgress: false,
 	}
 
-	const action = setCurrentPage(3)
+	const action = actions.setCurrentPage(3)
 
 	const endState = usersReducer(startState, action)
 
@@ -145,7 +136,7 @@ test('should be set quantity users in state', () => {
 		followingInProgress: false,
 	}
 
-	const action = setTotalUsersCount(3)
+	const action = actions.setTotalUsersCount(3)
 
 	const endState = usersReducer(startState, action)
 
@@ -162,7 +153,7 @@ test('should be set preloader flag', () => {
 		followingInProgress: false,
 	}
 
-	const action = togglePreloader(true)
+	const action = actions.togglePreloader(true)
 
 	const endState = usersReducer(startState, action)
 

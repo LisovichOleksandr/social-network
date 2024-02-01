@@ -1,6 +1,7 @@
+import React, { FC } from 'react'
 import { connect } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-import { reduxForm, InjectedFormProps } from 'redux-form'
+import { InjectedFormProps, reduxForm } from 'redux-form'
 
 import { login } from '../../redux/authReducer.ts'
 import { getIsAuth } from '../../redux/authSelector.ts'
@@ -8,30 +9,39 @@ import { getIsAuth } from '../../redux/authSelector.ts'
 import {
 	maxLengthCreator,
 	required,
-} from '../../utils/validators/validators.js'
+} from '../../utils/validators/validators.ts'
 import { Input, createField } from '../common/formsControls/formsControls.tsx'
 
+import { AppStateType } from '../../redux/reduxStore.js'
 import style from '../common/formsControls/formControls.module.css'
 import s from './login.module.css'
-import { AppStateType } from '../../redux/reduxStore.js'
 
 const maxLogin30 = maxLengthCreator(30)
 const maxPassword15 = maxLengthCreator(15)
 
-const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType>> = ({
+const LoginForm: FC<InjectedFormProps<LoginFormValuesType>> = ({
 	handleSubmit,
 	error,
 }) => {
 	return (
 		<form onSubmit={handleSubmit}>
-			{createField(Input, 'login', 'Email', [required, maxLogin30])}
-			{createField(Input, 'password', 'Password', [required, maxPassword15], {
-				type: 'password',
-			})}
-			{createField(
+			{createField<LoginFormValuesTypeKeys>(Input, 'login', 'Email', [
+				required,
+				maxLogin30,
+			])}
+			{createField<LoginFormValuesTypeKeys>(
+				Input,
+				'password',
+				'Password',
+				[required, maxPassword15],
+				{
+					type: 'password',
+				}
+			)}
+			{createField<LoginFormValuesTypeKeys>(
 				Input,
 				'rememberMe',
-				null,
+				undefined,
 				[],
 				{
 					type: 'checkbox',
@@ -65,7 +75,10 @@ type LoginFormValuesType = {
 	password: string
 	rememberMe: boolean
 }
-const Login: React.FC<MapStateToPropsType & MapDispatchToPropsType> = props => {
+
+type LoginFormValuesTypeKeys = Extract<keyof LoginFormValuesType, string>
+
+const Login: FC<MapStateToPropsType & MapDispatchToPropsType> = props => {
 	const onSubmit = (formData: LoginFormValuesType) => {
 		props.login(formData.login, formData.password, formData.rememberMe)
 	}
