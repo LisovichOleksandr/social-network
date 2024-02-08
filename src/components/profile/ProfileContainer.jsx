@@ -10,7 +10,6 @@ import {
 	getUserCurrent,
 	savePhoto,
 	saveProfile,
-	setUserProfile,
 	updateStatus,
 } from '../../redux/profileReducer.ts'
 import { actions } from '../../redux/usersReducer.ts'
@@ -75,7 +74,6 @@ const mapStateToProps = state => {
 
 export default compose(
 	connect(mapStateToProps, {
-		setUserProfile,
 		setCurrentPage: actions.setCurrentPage,
 		getUserCurrent,
 		getStatus,

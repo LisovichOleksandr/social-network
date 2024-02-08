@@ -5,12 +5,19 @@ import {
 	createField,
 } from '../../common/formsControls/formsControls.tsx'
 
-const ProfileDataForm = props => {
+import styles from './ProfileInfo.module.css'
+
+import style from '../../common/formsControls/formControls.module.css'
+
+const ProfileDataForm = ({ handleSubmit, profile, initialValues, error }) => {
 	return (
-		<form onSubmit={props.handleSubmit}>
+		<form onSubmit={handleSubmit}>
 			<div>
 				<button>Save</button>
 			</div>
+
+			{error && <div className={style.form__summary__error}>{error}</div>}
+
 			<div>
 				<b>Full name:</b> {createField(Input, 'fullName', 'Full Name', [])}
 			</div>
@@ -30,6 +37,18 @@ const ProfileDataForm = props => {
 			<div>
 				<b>About me:</b>
 				{createField(Textarea, 'aboutMe', 'About me', [])}
+			</div>
+			<div>
+				<b>Contacts</b>:{' '}
+				{Object.keys(profile.contacts).map(key => {
+					return (
+						<div key={key} className={styles.contacts}>
+							<b>
+								{key}: {createField(Input, 'contacts.' + key, key, [])}
+							</b>
+						</div>
+					)
+				})}
 			</div>
 		</form>
 	)

@@ -18,8 +18,9 @@ const ProfileInfo = props => {
 	}
 
 	const onSubmit = formData => {
-		props.saveProfile(formData)
-		setEditMode(false)
+		props.saveProfile(formData).then(() => {
+			setEditMode(false)
+		})
 	}
 
 	return (
@@ -50,7 +51,11 @@ const ProfileInfo = props => {
 					)}
 				</div>
 				{editMode ? (
-					<ProfileDataForm initialValues={props.profile} onSubmit={onSubmit} />
+					<ProfileDataForm
+						profile={props.profile}
+						initialValues={props.profile}
+						onSubmit={onSubmit}
+					/>
 				) : (
 					<ProfileData
 						profile={props.profile}

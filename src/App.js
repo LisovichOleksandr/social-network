@@ -29,7 +29,7 @@ import NavSoftSkills from './components/softSkills/navSoftSkills/navSoftSkills.t
 import SoftSkills from './components/softSkills/softSkills.tsx'
 import { initializeApp } from './redux/appReducer.ts'
 const DialogsContainer = React.lazy(() =>
-	import('./components/dialogs/DialogsContainer')
+	import('./components/dialogs/DialogsContainer.tsx')
 )
 const UsersContainer = React.lazy(() =>
 	import('./components/users/UsersContainer.tsx')

@@ -1,10 +1,9 @@
 import { Dispatch } from 'redux'
-import { ThunkAction } from 'redux-thunk'
 
 import { ResultCodeUnum } from '../api/api.ts'
 import { UserType } from '../types/types'
-import { updateObjectInArray } from '../utils/object-helpers'
-import { AppStateType, InferActionsTypes } from './reduxStore'
+import { updateObjectInArray } from '../utils/object-helpers.ts'
+import { AppStateType, BaseThunkType, InferActionsTypes } from './reduxStore'
 import { usersAPI } from '../api/user-api.ts'
 
 let initialState = {
@@ -23,33 +22,33 @@ export const usersReducer = (
 	action: ActionsType
 ): InitialStateUserType => {
 	switch (action.type) {
-		case 'FOLLOW':
+		case 'users/FOLLOW':
 			return {
 				...state,
 				users: updateObjectInArray(state.users, action.userId, 'id', {
 					followed: true,
 				}),
 			}
-		case 'UN_FOLLOW':
+		case 'users/UN_FOLLOW':
 			return {
 				...state,
 				users: updateObjectInArray(state.users, action.userId, 'id', {
 					followed: false,
 				}),
 			}
-		case 'SET_USERS':
+		case 'users/SET_USERS':
 			return { ...state, users: action.users }
 
-		case 'SET_CURRENT_PAGE':
+		case 'users/SET_CURRENT_PAGE':
 			return { ...state, currentPage: action.currentPage }
 
-		case 'SET_TOTAL_USERS_COUNT':
+		case 'users/SET_TOTAL_USERS_COUNT':
 			return { ...state, totalUsersCount: action.count }
 
-		case 'TOGGLE_IS_FOLLOWING_PROGRESS':
+		case 'users/TOGGLE_IS_FOLLOWING_PROGRESS':
 			return { ...state, followingInProgress: action.isFetching }
 
-		case 'TOGGLE_PRELOADER':
+		case 'users/TOGGLE_PRELOADER':
 			return { ...state, isFetching: action.isFetching }
 
 		default:
@@ -62,37 +61,37 @@ type ActionsType = InferActionsTypes<typeof actions>
 export const actions = {
 	followSuccess: (userId: number) =>
 		({
-			type: 'FOLLOW',
+			type: 'users/FOLLOW',
 			userId,
 		} as const),
 	unFollowSuccess: (userId: number) =>
 		({
-			type: 'UN_FOLLOW',
+			type: 'users/UN_FOLLOW',
 			userId,
 		} as const),
 	setUsers: (users: Array<UserType>) =>
 		({
-			type: 'SET_USERS',
+			type: 'users/SET_USERS',
 			users,
 		} as const),
 	setCurrentPage: (currentPage: number) =>
 		({
-			type: 'SET_CURRENT_PAGE',
+			type: 'users/SET_CURRENT_PAGE',
 			currentPage,
 		} as const),
 	setTotalUsersCount: (totalUserscount: number) =>
 		({
-			type: 'SET_TOTAL_USERS_COUNT',
+			type: 'users/SET_TOTAL_USERS_COUNT',
 			count: totalUserscount,
 		} as const),
 	togglePreloader: (isFetching: boolean) =>
 		({
-			type: 'TOGGLE_PRELOADER',
+			type: 'users/TOGGLE_PRELOADER',
 			isFetching,
 		} as const),
 	toggleFollowingProgress: (isFetching: boolean) =>
 		({
-			type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
+			type: 'users/TOGGLE_IS_FOLLOWING_PROGRESS',
 			isFetching,
 		} as const),
 }
@@ -100,11 +99,11 @@ export const actions = {
 // THUNK
 type DispatchType = Dispatch<ActionsType>
 type GetStateType = () => AppStateType
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsType>
+type ThunkType = BaseThunkType<ActionsType>
 
 export const getUsers =
 	(currentPage: number, pageSize: number): ThunkType =>
-	async (dispatch, getState) => {
+	async dispatch => {
 		dispatch(actions.togglePreloader(true))
 		let data = await usersAPI.getUsers(currentPage, pageSize)
 		dispatch(actions.setUsers(data.items))
