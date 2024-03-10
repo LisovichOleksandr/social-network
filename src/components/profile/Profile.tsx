@@ -1,15 +1,16 @@
 import React, { FC } from 'react'
-import MyPostsContainer from './myPosts/MyPostsContainer'
-import ProfileInfo from './profileInfo/ProfileInfo'
-import { ProfileType } from '../../types/types'
+
+import MyPostsContainer from './myPosts/MyPostsContainer.tsx'
+import ProfileInfo from './profileInfo/ProfileInfo.tsx'
+import { ProfileType } from '../../types/types.ts'
 
 export type ProfilePropsType = {
-	savePhoto: () => void
+	savePhoto: (file: File) => void
 	isOwner: boolean
-	profile: ProfileType
+	profile: ProfileType | null
 	status: string
-	updateStatus: () => void
-	saveProfile: () => void
+	updateStatus: (status: string) => void
+	saveProfile: (formData: ProfileType) => Promise<any>
 }
 
 const Profile: FC<ProfilePropsType> = ({

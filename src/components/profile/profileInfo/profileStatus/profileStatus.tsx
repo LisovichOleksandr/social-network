@@ -1,7 +1,12 @@
-import { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import classes from '../ProfileInfo.module.css'
 
-const ProfileStatus = props => {
+type PropsType = {
+	status: string
+	updateStatus: (status: string) => void
+}
+
+const ProfileStatus: React.FC<PropsType> = props => {
 	const [status, setStatus] = useState(props.status)
 	const [editMode, setMode] = useState(false)
 
@@ -11,7 +16,7 @@ const ProfileStatus = props => {
 	const activateEditMode = () => {
 		setMode(true)
 	}
-	const deActivateEditMode = e => {
+	const deActivateEditMode = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.charCode === 13 || e.type === 'blur') {
 			e.preventDefault()
 			setMode(false)

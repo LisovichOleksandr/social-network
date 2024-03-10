@@ -9,7 +9,11 @@ import {
 	maxLengthCreator,
 	required,
 } from '../../utils/validators/validators.ts'
-import { Input, createField } from '../common/formsControls/formsControls.tsx'
+import {
+	GetStringKeys,
+	Input,
+	createField,
+} from '../common/formsControls/formsControls.tsx'
 import style from '../common/formsControls/formControls.module.css'
 import s from './login.module.css'
 
@@ -96,7 +100,7 @@ type LoginFormValuesType = {
 	captcha: string
 }
 
-type LoginFormValuesTypeKeys = Extract<keyof LoginFormValuesType, string>
+type LoginFormValuesTypeKeys = GetStringKeys<LoginFormValuesType>
 
 const Login: FC<MapStateToPropsType & MapDispatchToPropsType> = props => {
 	const onSubmit = (formData: LoginFormValuesType) => {

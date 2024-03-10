@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react'
+import React, { Suspense, useEffect, FC } from 'react'
 import { connect } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
 import { compose } from 'redux'
@@ -19,23 +19,28 @@ import FastStartContainer from './components/apparatusComp/ItemApparatus/fastSta
 import IdiomPageContainer from './components/apparatusComp/ItemApparatus/idioms/idiomElement/idiomPage/idiomPageContainer'
 import IdiomsContainer from './components/apparatusComp/ItemApparatus/idioms/idiomsContainer'
 import SpellCheckContainer from './components/apparatusComp/ItemApparatus/spellCheck/spellCheckContainer'
-import Preloader from './components/common/preloader/preloader'
-import HeaderContainer from './components/header/HeaderContainer'
+import Preloader from './components/common/preloader/preloader.tsx'
+import HeaderContainer from './components/header/HeaderContainer.tsx'
 import LoginPage from './components/login/login.tsx'
 import ProfileContainer, {
 	withRouter,
-} from './components/profile/ProfileContainer'
-import NavSoftSkills from './components/softSkills/navSoftSkills/navSoftSkills.tsx'
-import SoftSkills from './components/softSkills/softSkills.tsx'
+} from './components/profile/ProfileContainer.tsx'
 import { initializeApp } from './redux/appReducer.ts'
-const DialogsContainer = React.lazy(() =>
-	import('./components/dialogs/DialogsContainer.tsx')
+import { AppStateType } from './redux/reduxStore'
+import Friends from './components/friends/Friends.tsx'
+const DialogsContainer = React.lazy(
+	() => import('./components/dialogs/DialogsContainer.tsx')
 )
-const UsersContainer = React.lazy(() =>
-	import('./components/users/UsersContainer.tsx')
+const UsersContainer = React.lazy(
+	() => import('./components/users/UsersContainer.tsx')
 )
 
-function App(props) {
+type StatePropsType = ReturnType<typeof mapStateToProps>
+type DispatchPropsType = {
+	initializeApp: () => void
+}
+
+const App: FC<StatePropsType & DispatchPropsType> = props => {
 	useEffect(() => {
 		props.initializeApp()
 	})
@@ -72,6 +77,9 @@ function App(props) {
 					<Route path='/music' element={<MusicContainer />} />
 					<Route path='/settings' element={<Settings />} />
 					<Route path='/apparatus' element={<Apparatus />} />
+
+					<Route path='/friends' element={<Friends />} />
+
 					<Route
 						path='/apparatus/simple-present'
 						element={<SimplePresentContainer />}
@@ -91,10 +99,6 @@ function App(props) {
 						path='/apparatus/etymology/:id?'
 						element={<DisplayEtymologyContainer />}
 					/>
-
-					<Route path='/soft-skills' element={<NavSoftSkills />} />
-					<Route path='/soft-skills/albert' element={<SoftSkills />} />
-
 					<Route
 						path='/apparatus/idioms/:id?'
 						element={<IdiomPageContainer />}
@@ -107,11 +111,11 @@ function App(props) {
 	)
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: AppStateType) => ({
 	initialized: state.app.initialized,
 })
 
-export default compose(
+export default compose<React.ComponentType>(
 	withRouter,
 	connect(mapStateToProps, { initializeApp })
 )(App)

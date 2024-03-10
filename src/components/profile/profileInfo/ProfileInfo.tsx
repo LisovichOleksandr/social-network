@@ -1,23 +1,36 @@
-import React, { useState } from 'react'
-import styles from './ProfileInfo.module.css'
-import Preloader from '../../common/preloader/preloader'
-import ProfileStatus from './profileStatus/profileStatus'
-import ava from '../../../assets/images/Untitled.png'
-import ProfileDataForm from './ProfileDataForm'
-import { postProfileDataThunk } from '../../../redux/profileReducer.ts'
+import React, { ChangeEvent, useState } from 'react'
 
-const ProfileInfo = props => {
+import Preloader from '../../common/preloader/preloader.tsx'
+import ProfileStatus from './profileStatus/profileStatus.tsx'
+import ProfileDataForm from './ProfileDataForm.tsx'
+import ava from '../../../assets/images/Untitled.png'
+
+import styles from './ProfileInfo.module.css'
+import { ProfilePropsType } from '../Profile'
+import { ProfileType } from '../../../types/types'
+
+type PropsType = {
+	profile: ProfileType | null
+	savePhoto: (file: File) => void
+	saveProfile: (formData: ProfileType) => Promise<any>
+	status: string
+	updateStatus: (status: string) => void
+	isOwner: boolean
+}
+
+const ProfileInfo: React.FC<PropsType> = props => {
 	const [editMode, setEditMode] = useState(false)
 
 	if (!props.profile) {
 		return <Preloader />
 	}
 
-	const onMainPhotoSelected = e => {
-		if (e.target.files.length) props.savePhoto(e.target.files[0])
+	const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+		if (e.target.files?.length) props.savePhoto(e.target.files[0])
 	}
 
-	const onSubmit = formData => {
+	const onSubmit = (formData: ProfileType) => {
+		//  todo: remove then
 		props.saveProfile(formData).then(() => {
 			setEditMode(false)
 		})
@@ -81,7 +94,13 @@ const ProfileInfo = props => {
 	)
 }
 
-const ProfileData = props => {
+type ProfileDataPropsType = {
+	isOwner: boolean
+	goToEditMode: () => void
+	profile: ProfileType
+}
+
+const ProfileData: React.FC<ProfileDataPropsType> = props => {
 	return (
 		<div>
 			{props.isOwner && (
@@ -118,8 +137,8 @@ const ProfileData = props => {
 	)
 }
 
-const Contacts = (contactTitle, contactValue) => {
-	return <div></div>
-}
+// const Contacts = (contactTitle, contactValue) => {
+// 	return <div></div>
+// }
 
 export default ProfileInfo

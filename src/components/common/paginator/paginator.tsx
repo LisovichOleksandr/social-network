@@ -9,7 +9,7 @@ type PropsType = {
 }
 
 const Paginator: FC<PropsType> = ({ totalItems, pageSize, onPageChanged }) => {
-	const [currentPage, setCurrentPage] = useState<number>(1)
+	const [currentPage, setCurrentPage] = useState(1)
 
 	let quantityPage = totalItems / pageSize
 	const pages: Array<number> = []

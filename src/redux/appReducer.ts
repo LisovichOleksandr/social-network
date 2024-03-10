@@ -1,5 +1,6 @@
 import { getAuthUserData } from './authReducer.ts'
-import { InferActionsTypes } from './reduxStore.js'
+import { InferActionsTypes } from './reduxStore.ts'
+import { getFriends } from './usersReducer.ts'
 
 let initialState = {
 	initialized: false,
@@ -36,6 +37,7 @@ export const initializeApp = () => (dispatch: any) => {
 	let promise = dispatch(getAuthUserData())
 	Promise.all([promise]).then(() => {
 		dispatch(actions.initializedSuccess())
+		dispatch(getFriends(true))
 	})
 }
 

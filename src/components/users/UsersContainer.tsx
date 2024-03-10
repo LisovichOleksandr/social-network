@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import withAuthRedirect from '../../hoc/redirect'
-import { AppStateType } from '../../redux/reduxStore'
+import withAuthRedirect from '../../hoc/redirect.tsx'
+import { AppStateType } from '../../redux/reduxStore.ts'
 import {
 	follow,
 	getUsers,
@@ -17,8 +17,8 @@ import {
 	getTotalUsersCount,
 	getUsersAll,
 } from '../../redux/usersSelectors.ts'
-import { UserType } from '../../types/types'
-import Preloader from '../common/preloader/preloader'
+import { UserType } from '../../types/types.ts'
+import Preloader from '../common/preloader/preloader.tsx'
 import Users from './Users.tsx'
 
 type OwnPropsType = {

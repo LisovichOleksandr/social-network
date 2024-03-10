@@ -57,6 +57,7 @@ const store = createStore(
 	composeEnhancers(applyMiddleware(thunkMiddleware))
 )
 
+export type AppDispatch = typeof store.dispatch
 // let store = createStore(reducers, applyMiddleware(thunkMiddleware))
 // @ts-ignore
 window.store = store

@@ -1,22 +1,26 @@
 .nav {
-  grid-area: n;
-  background-color: rgb(57, 54, 54);
-  padding: 30px;
+	grid-area: n;
+	background-color: rgb(57, 54, 54);
+	padding: 30px;
 }
 
 .item a {
-  color: white;
-  text-decoration: none;
+	color: white;
+	text-decoration: none;
 }
 
 .item a:active {
-  background-color: rgb(6, 100, 91);
+	background-color: rgb(6, 100, 91);
 }
 
 .item a:hover {
-  color: rgb(182, 182, 251);
+	color: rgb(182, 182, 251);
 }
 
 .friends {
-  margin-top: 50px;
+	display: initial;
 }
+
+/* .user img {
+	width: 10px;
+} */

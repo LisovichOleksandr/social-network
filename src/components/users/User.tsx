@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 
-import { UserType } from '../../types/types'
+import { UserType } from '../../types/types.ts'
 import userPhoto from '../../assets/images/Untitled.png'
 import styles from './Users.module.css'
 

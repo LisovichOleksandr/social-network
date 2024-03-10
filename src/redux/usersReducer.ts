@@ -1,13 +1,14 @@
 import { Dispatch } from 'redux'
 
 import { ResultCodeUnum } from '../api/api.ts'
+import { usersAPI } from '../api/user-api.ts'
 import { UserType } from '../types/types'
 import { updateObjectInArray } from '../utils/object-helpers.ts'
 import { AppStateType, BaseThunkType, InferActionsTypes } from './reduxStore'
-import { usersAPI } from '../api/user-api.ts'
 
 let initialState = {
 	users: [] as Array<UserType>,
+	friends: [] as Array<UserType>,
 	pageSize: 20,
 	totalUsersCount: 0,
 	currentPage: 1,
@@ -50,6 +51,9 @@ export const usersReducer = (
 
 		case 'users/TOGGLE_PRELOADER':
 			return { ...state, isFetching: action.isFetching }
+
+		case 'users/SET_FRIENDS':
+			return { ...state, friends: action.friends }
 
 		default:
 			return state
@@ -94,12 +98,24 @@ export const actions = {
 			type: 'users/TOGGLE_IS_FOLLOWING_PROGRESS',
 			isFetching,
 		} as const),
+	setFriends: (friends: Array<UserType>) =>
+		({
+			type: 'users/SET_FRIENDS',
+			friends,
+		} as const),
 }
 
 // THUNK
 type DispatchType = Dispatch<ActionsType>
 type GetStateType = () => AppStateType
 type ThunkType = BaseThunkType<ActionsType>
+
+export const getFriends =
+	(friends: boolean): ThunkType =>
+	async dispatch => {
+		let data = await usersAPI.getFriends()
+		dispatch(actions.setFriends(data.items))
+	}
 
 export const getUsers =
 	(currentPage: number, pageSize: number): ThunkType =>

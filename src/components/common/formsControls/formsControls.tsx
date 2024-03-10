@@ -60,6 +60,8 @@ export function createField<FormKeysType extends string>(
 	)
 }
 
+export type GetStringKeys<T> = Extract<keyof T, string>
+
 //  const hoc = (Children, <element />) => {
 // 	Children = ({input, meta, ...props}) => {
 // 	const hasError = meta.touched && meta.error

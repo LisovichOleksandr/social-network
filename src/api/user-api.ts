@@ -8,6 +8,13 @@ type GetUsersResponseType = {
 }
 
 export const usersAPI = {
+	getFriends(friends = true) {
+		return instance
+			.get<GetUsersResponseType>(`users?friends=${friends}`)
+			.then(res => {
+				return res.data
+			})
+	},
 	getUsers(currentPage = 1, pageSize = 20) {
 		return instance
 			.get<GetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)

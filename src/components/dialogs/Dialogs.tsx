@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
-import DialogItem from './dialogItem/DialogsItem'
-import Message from './message/Message'
+import DialogItem from './dialogItem/DialogsItem.tsx'
+import Message from './message/Message.tsx'
 import AddMessagesForm from './addMessagesForm/addMessagesForm.tsx'
 import classes from './Dialogs.module.css'
 

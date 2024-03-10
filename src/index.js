@@ -3,10 +3,10 @@ import { BrowserRouter, HashRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom/client'
 
-import App from './App'
+import App from './App.tsx'
 import store from './redux/reduxStore.ts'
 import './index.css'
-import reportWebVitals from './reportWebVitals'
+import reportWebVitals from './reportWebVitals.js'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(

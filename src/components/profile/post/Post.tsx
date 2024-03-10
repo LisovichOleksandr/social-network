@@ -1,7 +1,13 @@
-import React from 'react';
+import React from 'react'
+
 import classes from './Post.module.css'
 
-const Post = (props) => {
+type PropsType = {
+	likesCount: number
+	message: string
+}
+
+const Post: React.FC<PropsType> = props => {
 	return (
 		<div className={classes.item}>
 			<div className={classes.person}>

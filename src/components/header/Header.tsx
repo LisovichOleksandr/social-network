@@ -1,8 +1,18 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+
 import classes from './Header.module.css'
 
-const Header = props => {
+export type MapPropsType = {
+	isAuth: boolean
+	login: string | null
+	info: string | null
+}
+export type DispatchPropsType = {
+	logout: () => void
+}
+
+const Header: React.FC<MapPropsType & DispatchPropsType> = props => {
 	return (
 		<header className={classes.header}>
 			<img src='https://png.pngtree.com/template/20191024/ourmid/pngtree-mountain-landscape-logo-design-hiking-travel-and-adventure-concept-design-image_323034.jpg' />
